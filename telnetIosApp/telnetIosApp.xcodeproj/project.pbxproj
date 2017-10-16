@@ -1,0 +1,995 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C807A551F555CB300164670 /* TelDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A541F555CB300164670 /* TelDataBase.m */; };
+		7C807A581F5561E600164670 /* ipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A571F5561E600164670 /* ipModel.m */; };
+		7C807A5C1F5659E000164670 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A5A1F5659E000164670 /* MainTableViewCell.m */; };
+		7C807A5D1F5659E000164670 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C807A5B1F5659E000164670 /* MainTableViewCell.xib */; };
+		7C807A601F565FDD00164670 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A5F1F565FDD00164670 /* Config.m */; };
+		7CAF0C761F4AD7D6000B65DE /* QRCScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C631F4AD7D6000B65DE /* QRCScanner.m */; };
+		7CAF0C771F4AD7D6000B65DE /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C661F4AD7D6000B65DE /* bitstream.c */; };
+		7CAF0C781F4AD7D6000B65DE /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C681F4AD7D6000B65DE /* mask.c */; };
+		7CAF0C791F4AD7D6000B65DE /* qrencode.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C6A1F4AD7D6000B65DE /* qrencode.c */; };
+		7CAF0C7A1F4AD7D6000B65DE /* qrinput.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C6C1F4AD7D6000B65DE /* qrinput.c */; };
+		7CAF0C7B1F4AD7D6000B65DE /* qrspec.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C6E1F4AD7D6000B65DE /* qrspec.c */; };
+		7CAF0C7C1F4AD7D6000B65DE /* rscode.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C701F4AD7D6000B65DE /* rscode.c */; };
+		7CAF0C7D1F4AD7D6000B65DE /* split.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C721F4AD7D6000B65DE /* split.c */; };
+		7CAF0C7E1F4AD7D6000B65DE /* UIImage+MDQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C751F4AD7D6000B65DE /* UIImage+MDQRCode.m */; };
+		7CAF0C811F4AD7E6000B65DE /* QRCScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C801F4AD7E6000B65DE /* QRCScannerViewController.m */; };
+		7CAF0CCD1F4C0C9D000B65DE /* SSIDTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0CCC1F4C0C9D000B65DE /* SSIDTool.m */; };
+		7CAF0CD01F4C2760000B65DE /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CAF0CCF1F4C2760000B65DE /* NetworkExtension.framework */; };
+		7CAF0CD31F4D1A02000B65DE /* cloudAndPwdAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD21F4D1A02000B65DE /* cloudAndPwdAlertView.m */; };
+		7CAF0CD51F4D1A0D000B65DE /* cloudAndPwdAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD41F4D1A0D000B65DE /* cloudAndPwdAlertView.xib */; };
+		7CAF0CD81F4D2963000B65DE /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD71F4D2963000B65DE /* UIView+Toast.m */; };
+		7CC737701F3AB4F700113B3F /* UIViewController+DismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */; };
+		7CC737761F3AB5EC00113B3F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737731F3AB5EC00113B3F /* GCDAsyncSocket.m */; };
+		7CC737771F3AB5EC00113B3F /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737751F3AB5EC00113B3F /* GCDAsyncUdpSocket.m */; };
+		7CC7377A1F3AB5FA00113B3F /* YSSocketProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737791F3AB5FA00113B3F /* YSSocketProtocol.m */; };
+		7CDE09B31F56633800C3378B /* BaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B21F56633800C3378B /* BaseNavViewController.m */; };
+		7CDE09B61F56639300C3378B /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B51F56639300C3378B /* AppConst.m */; };
+		7CDE09BA1F56B5F000C3378B /* smallSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B91F56B5F000C3378B /* smallSwitch.m */; };
+		7CDE09BD1F56C08B00C3378B /* cofigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09BC1F56C08B00C3378B /* cofigInfo.m */; };
+		7CE0E5B31F57E077003C06A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE0E5B21F57E077003C06A4 /* SystemConfiguration.framework */; };
+		7CE367021F386F6C00171647 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE367011F386F6C00171647 /* main.m */; };
+		7CE367051F386F6C00171647 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE367041F386F6C00171647 /* AppDelegate.m */; };
+		7CE3670B1F386F6C00171647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE367091F386F6C00171647 /* Main.storyboard */; };
+		7CE3670D1F386F6C00171647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE3670C1F386F6C00171647 /* Assets.xcassets */; };
+		7CE367101F386F6C00171647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE3670E1F386F6C00171647 /* LaunchScreen.storyboard */; };
+		7CE3671B1F386F6C00171647 /* telnetIosAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE3671A1F386F6C00171647 /* telnetIosAppTests.m */; };
+		7CE367261F386F6C00171647 /* telnetIosAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE367251F386F6C00171647 /* telnetIosAppUITests.m */; };
+		7CE367391F38704900171647 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE367381F38704900171647 /* MainTableViewController.m */; };
+		7CE3673C1F38763600171647 /* TelnetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE3673B1F38763600171647 /* TelnetTableViewController.m */; };
+		7CE7CB901F4EBCA4009787BA /* ConfigTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7CB8F1F4EBCA4009787BA /* ConfigTableViewController.m */; };
+		7CE7CB931F4EC9E3009787BA /* popViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7CB921F4EC9E3009787BA /* popViewController.m */; };
+		7CFD3CD11F5901320047D584 /* LocalConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CB61F5901320047D584 /* LocalConnection.m */; };
+		7CFD3CD21F5901320047D584 /* FSMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CBA1F5901320047D584 /* FSMEngine.m */; };
+		7CFD3CD31F5901320047D584 /* FSMStateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CBC1F5901320047D584 /* FSMStateUtil.m */; };
+		7CFD3CD41F5901320047D584 /* ReachState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CBE1F5901320047D584 /* ReachState.m */; };
+		7CFD3CD51F5901320047D584 /* ReachStateLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CC01F5901320047D584 /* ReachStateLoading.m */; };
+		7CFD3CD61F5901320047D584 /* ReachStateUnloaded.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CC21F5901320047D584 /* ReachStateUnloaded.m */; };
+		7CFD3CD71F5901320047D584 /* ReachStateUnReachable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CC41F5901320047D584 /* ReachStateUnReachable.m */; };
+		7CFD3CD81F5901320047D584 /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CC61F5901320047D584 /* ReachStateWIFI.m */; };
+		7CFD3CD91F5901320047D584 /* ReachStateWWAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CC81F5901320047D584 /* ReachStateWWAN.m */; };
+		7CFD3CDA1F5901320047D584 /* PingFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CCB1F5901320047D584 /* PingFoundation.m */; };
+		7CFD3CDB1F5901320047D584 /* PingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CCD1F5901320047D584 /* PingHelper.m */; };
+		7CFD3CDC1F5901320047D584 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CCE1F5901320047D584 /* README.md */; };
+		7CFD3CDD1F5901320047D584 /* RealReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CFD3CD01F5901320047D584 /* RealReachability.m */; };
+		DC4796D4C2CF71503E6AAC23 /* libPods-telnetIosApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF67A23096EF5C704DA1A335 /* libPods-telnetIosApp.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7CE367171F386F6C00171647 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CE366F51F386F6C00171647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CE366FC1F386F6C00171647;
+			remoteInfo = telnetIosApp;
+		};
+		7CE367221F386F6C00171647 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7CE366F51F386F6C00171647 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CE366FC1F386F6C00171647;
+			remoteInfo = telnetIosApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		58B451F93119C9119D1CB594 /* Pods-telnetIosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telnetIosApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-telnetIosApp/Pods-telnetIosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		7C807A531F555CB300164670 /* TelDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelDataBase.h; sourceTree = "<group>"; };
+		7C807A541F555CB300164670 /* TelDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelDataBase.m; sourceTree = "<group>"; };
+		7C807A561F5561E600164670 /* ipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ipModel.h; sourceTree = "<group>"; };
+		7C807A571F5561E600164670 /* ipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ipModel.m; sourceTree = "<group>"; };
+		7C807A591F5659E000164670 /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
+		7C807A5A1F5659E000164670 /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
+		7C807A5B1F5659E000164670 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
+		7C807A5E1F565FDD00164670 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		7C807A5F1F565FDD00164670 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		7CAF0C621F4AD7D6000B65DE /* QRCScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCScanner.h; sourceTree = "<group>"; };
+		7CAF0C631F4AD7D6000B65DE /* QRCScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCScanner.m; sourceTree = "<group>"; };
+		7CAF0C661F4AD7D6000B65DE /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
+		7CAF0C671F4AD7D6000B65DE /* bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitstream.h; sourceTree = "<group>"; };
+		7CAF0C681F4AD7D6000B65DE /* mask.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mask.c; sourceTree = "<group>"; };
+		7CAF0C691F4AD7D6000B65DE /* mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mask.h; sourceTree = "<group>"; };
+		7CAF0C6A1F4AD7D6000B65DE /* qrencode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrencode.c; sourceTree = "<group>"; };
+		7CAF0C6B1F4AD7D6000B65DE /* qrencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrencode.h; sourceTree = "<group>"; };
+		7CAF0C6C1F4AD7D6000B65DE /* qrinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrinput.c; sourceTree = "<group>"; };
+		7CAF0C6D1F4AD7D6000B65DE /* qrinput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrinput.h; sourceTree = "<group>"; };
+		7CAF0C6E1F4AD7D6000B65DE /* qrspec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = qrspec.c; sourceTree = "<group>"; };
+		7CAF0C6F1F4AD7D6000B65DE /* qrspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qrspec.h; sourceTree = "<group>"; };
+		7CAF0C701F4AD7D6000B65DE /* rscode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rscode.c; sourceTree = "<group>"; };
+		7CAF0C711F4AD7D6000B65DE /* rscode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rscode.h; sourceTree = "<group>"; };
+		7CAF0C721F4AD7D6000B65DE /* split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = split.c; sourceTree = "<group>"; };
+		7CAF0C731F4AD7D6000B65DE /* split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = split.h; sourceTree = "<group>"; };
+		7CAF0C741F4AD7D6000B65DE /* UIImage+MDQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MDQRCode.h"; sourceTree = "<group>"; };
+		7CAF0C751F4AD7D6000B65DE /* UIImage+MDQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MDQRCode.m"; sourceTree = "<group>"; };
+		7CAF0C7F1F4AD7E6000B65DE /* QRCScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCScannerViewController.h; sourceTree = "<group>"; };
+		7CAF0C801F4AD7E6000B65DE /* QRCScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCScannerViewController.m; sourceTree = "<group>"; };
+		7CAF0CCB1F4C0C9D000B65DE /* SSIDTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSIDTool.h; sourceTree = "<group>"; };
+		7CAF0CCC1F4C0C9D000B65DE /* SSIDTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSIDTool.m; sourceTree = "<group>"; };
+		7CAF0CCF1F4C2760000B65DE /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		7CAF0CD11F4D1A02000B65DE /* cloudAndPwdAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cloudAndPwdAlertView.h; sourceTree = "<group>"; };
+		7CAF0CD21F4D1A02000B65DE /* cloudAndPwdAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cloudAndPwdAlertView.m; sourceTree = "<group>"; };
+		7CAF0CD41F4D1A0D000B65DE /* cloudAndPwdAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cloudAndPwdAlertView.xib; sourceTree = "<group>"; };
+		7CAF0CD61F4D2963000B65DE /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		7CAF0CD71F4D2963000B65DE /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		7CC7376E1F3AB4F700113B3F /* UIViewController+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DismissKeyboard.h"; sourceTree = "<group>"; };
+		7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DismissKeyboard.m"; sourceTree = "<group>"; };
+		7CC737721F3AB5EC00113B3F /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		7CC737731F3AB5EC00113B3F /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		7CC737741F3AB5EC00113B3F /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		7CC737751F3AB5EC00113B3F /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		7CC737781F3AB5FA00113B3F /* YSSocketProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSSocketProtocol.h; sourceTree = "<group>"; };
+		7CC737791F3AB5FA00113B3F /* YSSocketProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSSocketProtocol.m; sourceTree = "<group>"; };
+		7CDE09B11F56633800C3378B /* BaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavViewController.h; sourceTree = "<group>"; };
+		7CDE09B21F56633800C3378B /* BaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavViewController.m; sourceTree = "<group>"; };
+		7CDE09B41F56639300C3378B /* AppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
+		7CDE09B51F56639300C3378B /* AppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConst.m; sourceTree = "<group>"; };
+		7CDE09B71F5663C800C3378B /* appColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = appColor.h; sourceTree = "<group>"; };
+		7CDE09B81F56B5F000C3378B /* smallSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smallSwitch.h; sourceTree = "<group>"; };
+		7CDE09B91F56B5F000C3378B /* smallSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = smallSwitch.m; sourceTree = "<group>"; };
+		7CDE09BB1F56C08B00C3378B /* cofigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cofigInfo.h; sourceTree = "<group>"; };
+		7CDE09BC1F56C08B00C3378B /* cofigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cofigInfo.m; sourceTree = "<group>"; };
+		7CE0E5B21F57E077003C06A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7CE366FD1F386F6C00171647 /* telnetIosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = telnetIosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CE367011F386F6C00171647 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7CE367031F386F6C00171647 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
+		7CE367041F386F6C00171647 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
+		7CE3670A1F386F6C00171647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7CE3670C1F386F6C00171647 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		7CE3670F1F386F6C00171647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7CE367111F386F6C00171647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		7CE367161F386F6C00171647 /* telnetIosAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telnetIosAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CE3671A1F386F6C00171647 /* telnetIosAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telnetIosAppTests.m; sourceTree = "<group>"; };
+		7CE3671C1F386F6C00171647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CE367211F386F6C00171647 /* telnetIosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = telnetIosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CE367251F386F6C00171647 /* telnetIosAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = telnetIosAppUITests.m; sourceTree = "<group>"; };
+		7CE367271F386F6C00171647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CE367371F38704900171647 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		7CE367381F38704900171647 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		7CE3673A1F38763600171647 /* TelnetTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelnetTableViewController.h; sourceTree = "<group>"; };
+		7CE3673B1F38763600171647 /* TelnetTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelnetTableViewController.m; sourceTree = "<group>"; };
+		7CE7CB8E1F4EBCA4009787BA /* ConfigTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigTableViewController.h; sourceTree = "<group>"; };
+		7CE7CB8F1F4EBCA4009787BA /* ConfigTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTableViewController.m; sourceTree = "<group>"; };
+		7CE7CB911F4EC9E3009787BA /* popViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = popViewController.h; sourceTree = "<group>"; };
+		7CE7CB921F4EC9E3009787BA /* popViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = popViewController.m; sourceTree = "<group>"; };
+		7CFD3CB51F5901320047D584 /* LocalConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalConnection.h; sourceTree = "<group>"; };
+		7CFD3CB61F5901320047D584 /* LocalConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalConnection.m; sourceTree = "<group>"; };
+		7CFD3CB81F5901320047D584 /* FSMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMDefines.h; sourceTree = "<group>"; };
+		7CFD3CB91F5901320047D584 /* FSMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMEngine.h; sourceTree = "<group>"; };
+		7CFD3CBA1F5901320047D584 /* FSMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMEngine.m; sourceTree = "<group>"; };
+		7CFD3CBB1F5901320047D584 /* FSMStateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMStateUtil.h; sourceTree = "<group>"; };
+		7CFD3CBC1F5901320047D584 /* FSMStateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMStateUtil.m; sourceTree = "<group>"; };
+		7CFD3CBD1F5901320047D584 /* ReachState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachState.h; sourceTree = "<group>"; };
+		7CFD3CBE1F5901320047D584 /* ReachState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachState.m; sourceTree = "<group>"; };
+		7CFD3CBF1F5901320047D584 /* ReachStateLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateLoading.h; sourceTree = "<group>"; };
+		7CFD3CC01F5901320047D584 /* ReachStateLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateLoading.m; sourceTree = "<group>"; };
+		7CFD3CC11F5901320047D584 /* ReachStateUnloaded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnloaded.h; sourceTree = "<group>"; };
+		7CFD3CC21F5901320047D584 /* ReachStateUnloaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnloaded.m; sourceTree = "<group>"; };
+		7CFD3CC31F5901320047D584 /* ReachStateUnReachable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateUnReachable.h; sourceTree = "<group>"; };
+		7CFD3CC41F5901320047D584 /* ReachStateUnReachable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateUnReachable.m; sourceTree = "<group>"; };
+		7CFD3CC51F5901320047D584 /* ReachStateWIFI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWIFI.h; sourceTree = "<group>"; };
+		7CFD3CC61F5901320047D584 /* ReachStateWIFI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWIFI.m; sourceTree = "<group>"; };
+		7CFD3CC71F5901320047D584 /* ReachStateWWAN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachStateWWAN.h; sourceTree = "<group>"; };
+		7CFD3CC81F5901320047D584 /* ReachStateWWAN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachStateWWAN.m; sourceTree = "<group>"; };
+		7CFD3CCA1F5901320047D584 /* PingFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingFoundation.h; sourceTree = "<group>"; };
+		7CFD3CCB1F5901320047D584 /* PingFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingFoundation.m; sourceTree = "<group>"; };
+		7CFD3CCC1F5901320047D584 /* PingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PingHelper.h; sourceTree = "<group>"; };
+		7CFD3CCD1F5901320047D584 /* PingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PingHelper.m; sourceTree = "<group>"; };
+		7CFD3CCE1F5901320047D584 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7CFD3CCF1F5901320047D584 /* RealReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealReachability.h; sourceTree = "<group>"; };
+		7CFD3CD01F5901320047D584 /* RealReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealReachability.m; sourceTree = "<group>"; };
+		BF67A23096EF5C704DA1A335 /* libPods-telnetIosApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-telnetIosApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5BD2D1822D2F48C97E8AAC3 /* Pods-telnetIosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telnetIosApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-telnetIosApp/Pods-telnetIosApp.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CE366FA1F386F6C00171647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE0E5B31F57E077003C06A4 /* SystemConfiguration.framework in Frameworks */,
+				7CAF0CD01F4C2760000B65DE /* NetworkExtension.framework in Frameworks */,
+				DC4796D4C2CF71503E6AAC23 /* libPods-telnetIosApp.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE367131F386F6C00171647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE3671E1F386F6C00171647 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7CAF0C611F4AD7D6000B65DE /* QRCodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF0C621F4AD7D6000B65DE /* QRCScanner.h */,
+				7CAF0C631F4AD7D6000B65DE /* QRCScanner.m */,
+				7CAF0C641F4AD7D6000B65DE /* resource */,
+			);
+			path = QRCodeScanner;
+			sourceTree = "<group>";
+		};
+		7CAF0C641F4AD7D6000B65DE /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF0C651F4AD7D6000B65DE /* libqrencode */,
+				7CAF0C741F4AD7D6000B65DE /* UIImage+MDQRCode.h */,
+				7CAF0C751F4AD7D6000B65DE /* UIImage+MDQRCode.m */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		7CAF0C651F4AD7D6000B65DE /* libqrencode */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF0C661F4AD7D6000B65DE /* bitstream.c */,
+				7CAF0C671F4AD7D6000B65DE /* bitstream.h */,
+				7CAF0C681F4AD7D6000B65DE /* mask.c */,
+				7CAF0C691F4AD7D6000B65DE /* mask.h */,
+				7CAF0C6A1F4AD7D6000B65DE /* qrencode.c */,
+				7CAF0C6B1F4AD7D6000B65DE /* qrencode.h */,
+				7CAF0C6C1F4AD7D6000B65DE /* qrinput.c */,
+				7CAF0C6D1F4AD7D6000B65DE /* qrinput.h */,
+				7CAF0C6E1F4AD7D6000B65DE /* qrspec.c */,
+				7CAF0C6F1F4AD7D6000B65DE /* qrspec.h */,
+				7CAF0C701F4AD7D6000B65DE /* rscode.c */,
+				7CAF0C711F4AD7D6000B65DE /* rscode.h */,
+				7CAF0C721F4AD7D6000B65DE /* split.c */,
+				7CAF0C731F4AD7D6000B65DE /* split.h */,
+			);
+			path = libqrencode;
+			sourceTree = "<group>";
+		};
+		7CAF0CC71F4BD870000B65DE /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF0CD61F4D2963000B65DE /* UIView+Toast.h */,
+				7CAF0CD71F4D2963000B65DE /* UIView+Toast.m */,
+				7CAF0CCB1F4C0C9D000B65DE /* SSIDTool.h */,
+				7CAF0CCC1F4C0C9D000B65DE /* SSIDTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		7CAF0CCE1F4C275F000B65DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CE0E5B21F57E077003C06A4 /* SystemConfiguration.framework */,
+				7CAF0CCF1F4C2760000B65DE /* NetworkExtension.framework */,
+				BF67A23096EF5C704DA1A335 /* libPods-telnetIosApp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CC7376D1F3AB4DC00113B3F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				7CAF0CC71F4BD870000B65DE /* Tool */,
+				7CAF0C611F4AD7D6000B65DE /* QRCodeScanner */,
+				7CC7376E1F3AB4F700113B3F /* UIViewController+DismissKeyboard.h */,
+				7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */,
+				7C807A5E1F565FDD00164670 /* Config.h */,
+				7C807A5F1F565FDD00164670 /* Config.m */,
+				7CDE09B41F56639300C3378B /* AppConst.h */,
+				7CDE09B51F56639300C3378B /* AppConst.m */,
+				7CDE09B71F5663C800C3378B /* appColor.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		7CC737711F3AB5E200113B3F /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				7CC737721F3AB5EC00113B3F /* GCDAsyncSocket.h */,
+				7CC737731F3AB5EC00113B3F /* GCDAsyncSocket.m */,
+				7CC737741F3AB5EC00113B3F /* GCDAsyncUdpSocket.h */,
+				7CC737751F3AB5EC00113B3F /* GCDAsyncUdpSocket.m */,
+				7CC737781F3AB5FA00113B3F /* YSSocketProtocol.h */,
+				7CC737791F3AB5FA00113B3F /* YSSocketProtocol.m */,
+				7C807A531F555CB300164670 /* TelDataBase.h */,
+				7C807A541F555CB300164670 /* TelDataBase.m */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		7CE366F41F386F6C00171647 = {
+			isa = PBXGroup;
+			children = (
+				7CE366FF1F386F6C00171647 /* telnetIosApp */,
+				7CE367191F386F6C00171647 /* telnetIosAppTests */,
+				7CE367241F386F6C00171647 /* telnetIosAppUITests */,
+				7CE366FE1F386F6C00171647 /* Products */,
+				7CAF0CCE1F4C275F000B65DE /* Frameworks */,
+				C38B81E6DC4D341BC8053596 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		7CE366FE1F386F6C00171647 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CE366FD1F386F6C00171647 /* telnetIosApp.app */,
+				7CE367161F386F6C00171647 /* telnetIosAppTests.xctest */,
+				7CE367211F386F6C00171647 /* telnetIosAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CE366FF1F386F6C00171647 /* telnetIosApp */ = {
+			isa = PBXGroup;
+			children = (
+				7CFD3CB31F59011F0047D584 /* NetStatus */,
+				7CC737711F3AB5E200113B3F /* GCD */,
+				7CE367341F38701F00171647 /* Controller */,
+				7CE367361F38701F00171647 /* View */,
+				7CE367351F38701F00171647 /* Model */,
+				7CC7376D1F3AB4DC00113B3F /* Other */,
+				7CE367331F386FF500171647 /* Resource */,
+				7CE367001F386F6C00171647 /* Supporting Files */,
+			);
+			path = telnetIosApp;
+			sourceTree = "<group>";
+		};
+		7CE367001F386F6C00171647 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CE367011F386F6C00171647 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CE367191F386F6C00171647 /* telnetIosAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				7CE3671A1F386F6C00171647 /* telnetIosAppTests.m */,
+				7CE3671C1F386F6C00171647 /* Info.plist */,
+			);
+			path = telnetIosAppTests;
+			sourceTree = "<group>";
+		};
+		7CE367241F386F6C00171647 /* telnetIosAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7CE367251F386F6C00171647 /* telnetIosAppUITests.m */,
+				7CE367271F386F6C00171647 /* Info.plist */,
+			);
+			path = telnetIosAppUITests;
+			sourceTree = "<group>";
+		};
+		7CE367331F386FF500171647 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7CE367031F386F6C00171647 /* AppDelegate.h */,
+				7CE367041F386F6C00171647 /* AppDelegate.m */,
+				7CE367091F386F6C00171647 /* Main.storyboard */,
+				7CE3670C1F386F6C00171647 /* Assets.xcassets */,
+				7CE3670E1F386F6C00171647 /* LaunchScreen.storyboard */,
+				7CE367111F386F6C00171647 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		7CE367341F38701F00171647 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7CE367371F38704900171647 /* MainTableViewController.h */,
+				7CE367381F38704900171647 /* MainTableViewController.m */,
+				7CE3673A1F38763600171647 /* TelnetTableViewController.h */,
+				7CE3673B1F38763600171647 /* TelnetTableViewController.m */,
+				7CE7CB8E1F4EBCA4009787BA /* ConfigTableViewController.h */,
+				7CE7CB8F1F4EBCA4009787BA /* ConfigTableViewController.m */,
+				7CAF0C7F1F4AD7E6000B65DE /* QRCScannerViewController.h */,
+				7CAF0C801F4AD7E6000B65DE /* QRCScannerViewController.m */,
+				7CE7CB911F4EC9E3009787BA /* popViewController.h */,
+				7CE7CB921F4EC9E3009787BA /* popViewController.m */,
+				7CDE09B11F56633800C3378B /* BaseNavViewController.h */,
+				7CDE09B21F56633800C3378B /* BaseNavViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7CE367351F38701F00171647 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7C807A561F5561E600164670 /* ipModel.h */,
+				7C807A571F5561E600164670 /* ipModel.m */,
+				7CDE09BB1F56C08B00C3378B /* cofigInfo.h */,
+				7CDE09BC1F56C08B00C3378B /* cofigInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7CE367361F38701F00171647 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7C807A591F5659E000164670 /* MainTableViewCell.h */,
+				7C807A5A1F5659E000164670 /* MainTableViewCell.m */,
+				7C807A5B1F5659E000164670 /* MainTableViewCell.xib */,
+				7CAF0CD11F4D1A02000B65DE /* cloudAndPwdAlertView.h */,
+				7CAF0CD21F4D1A02000B65DE /* cloudAndPwdAlertView.m */,
+				7CAF0CD41F4D1A0D000B65DE /* cloudAndPwdAlertView.xib */,
+				7CDE09B81F56B5F000C3378B /* smallSwitch.h */,
+				7CDE09B91F56B5F000C3378B /* smallSwitch.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7CFD3CB31F59011F0047D584 /* NetStatus */ = {
+			isa = PBXGroup;
+			children = (
+				7CFD3CB41F5901320047D584 /* Connection */,
+				7CFD3CB71F5901320047D584 /* FSM */,
+				7CFD3CC91F5901320047D584 /* Ping */,
+				7CFD3CCF1F5901320047D584 /* RealReachability.h */,
+				7CFD3CD01F5901320047D584 /* RealReachability.m */,
+			);
+			path = NetStatus;
+			sourceTree = "<group>";
+		};
+		7CFD3CB41F5901320047D584 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				7CFD3CB51F5901320047D584 /* LocalConnection.h */,
+				7CFD3CB61F5901320047D584 /* LocalConnection.m */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		7CFD3CB71F5901320047D584 /* FSM */ = {
+			isa = PBXGroup;
+			children = (
+				7CFD3CB81F5901320047D584 /* FSMDefines.h */,
+				7CFD3CB91F5901320047D584 /* FSMEngine.h */,
+				7CFD3CBA1F5901320047D584 /* FSMEngine.m */,
+				7CFD3CBB1F5901320047D584 /* FSMStateUtil.h */,
+				7CFD3CBC1F5901320047D584 /* FSMStateUtil.m */,
+				7CFD3CBD1F5901320047D584 /* ReachState.h */,
+				7CFD3CBE1F5901320047D584 /* ReachState.m */,
+				7CFD3CBF1F5901320047D584 /* ReachStateLoading.h */,
+				7CFD3CC01F5901320047D584 /* ReachStateLoading.m */,
+				7CFD3CC11F5901320047D584 /* ReachStateUnloaded.h */,
+				7CFD3CC21F5901320047D584 /* ReachStateUnloaded.m */,
+				7CFD3CC31F5901320047D584 /* ReachStateUnReachable.h */,
+				7CFD3CC41F5901320047D584 /* ReachStateUnReachable.m */,
+				7CFD3CC51F5901320047D584 /* ReachStateWIFI.h */,
+				7CFD3CC61F5901320047D584 /* ReachStateWIFI.m */,
+				7CFD3CC71F5901320047D584 /* ReachStateWWAN.h */,
+				7CFD3CC81F5901320047D584 /* ReachStateWWAN.m */,
+			);
+			path = FSM;
+			sourceTree = "<group>";
+		};
+		7CFD3CC91F5901320047D584 /* Ping */ = {
+			isa = PBXGroup;
+			children = (
+				7CFD3CCA1F5901320047D584 /* PingFoundation.h */,
+				7CFD3CCB1F5901320047D584 /* PingFoundation.m */,
+				7CFD3CCC1F5901320047D584 /* PingHelper.h */,
+				7CFD3CCD1F5901320047D584 /* PingHelper.m */,
+				7CFD3CCE1F5901320047D584 /* README.md */,
+			);
+			path = Ping;
+			sourceTree = "<group>";
+		};
+		C38B81E6DC4D341BC8053596 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				58B451F93119C9119D1CB594 /* Pods-telnetIosApp.debug.xcconfig */,
+				E5BD2D1822D2F48C97E8AAC3 /* Pods-telnetIosApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CE366FC1F386F6C00171647 /* telnetIosApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CE3672A1F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosApp" */;
+			buildPhases = (
+				7870C1022AA0CE6A76BA14C5 /* [CP] Check Pods Manifest.lock */,
+				7CE366F91F386F6C00171647 /* Sources */,
+				7CE366FA1F386F6C00171647 /* Frameworks */,
+				7CE366FB1F386F6C00171647 /* Resources */,
+				11B400CC23306F2E3CF8A467 /* [CP] Embed Pods Frameworks */,
+				5BC85AD57A8A300ACB278969 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = telnetIosApp;
+			productName = telnetIosApp;
+			productReference = 7CE366FD1F386F6C00171647 /* telnetIosApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7CE367151F386F6C00171647 /* telnetIosAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CE3672D1F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosAppTests" */;
+			buildPhases = (
+				7CE367121F386F6C00171647 /* Sources */,
+				7CE367131F386F6C00171647 /* Frameworks */,
+				7CE367141F386F6C00171647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CE367181F386F6C00171647 /* PBXTargetDependency */,
+			);
+			name = telnetIosAppTests;
+			productName = telnetIosAppTests;
+			productReference = 7CE367161F386F6C00171647 /* telnetIosAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7CE367201F386F6C00171647 /* telnetIosAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CE367301F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosAppUITests" */;
+			buildPhases = (
+				7CE3671D1F386F6C00171647 /* Sources */,
+				7CE3671E1F386F6C00171647 /* Frameworks */,
+				7CE3671F1F386F6C00171647 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CE367231F386F6C00171647 /* PBXTargetDependency */,
+			);
+			name = telnetIosAppUITests;
+			productName = telnetIosAppUITests;
+			productReference = 7CE367211F386F6C00171647 /* telnetIosAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CE366F51F386F6C00171647 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "姜易成";
+				TargetAttributes = {
+					7CE366FC1F386F6C00171647 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 5A5VHB7889;
+						ProvisioningStyle = Automatic;
+					};
+					7CE367151F386F6C00171647 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7CE366FC1F386F6C00171647;
+					};
+					7CE367201F386F6C00171647 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7CE366FC1F386F6C00171647;
+					};
+				};
+			};
+			buildConfigurationList = 7CE366F81F386F6C00171647 /* Build configuration list for PBXProject "telnetIosApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7CE366F41F386F6C00171647;
+			productRefGroup = 7CE366FE1F386F6C00171647 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CE366FC1F386F6C00171647 /* telnetIosApp */,
+				7CE367151F386F6C00171647 /* telnetIosAppTests */,
+				7CE367201F386F6C00171647 /* telnetIosAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CE366FB1F386F6C00171647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE367101F386F6C00171647 /* LaunchScreen.storyboard in Resources */,
+				7CAF0CD51F4D1A0D000B65DE /* cloudAndPwdAlertView.xib in Resources */,
+				7CE3670D1F386F6C00171647 /* Assets.xcassets in Resources */,
+				7CE3670B1F386F6C00171647 /* Main.storyboard in Resources */,
+				7C807A5D1F5659E000164670 /* MainTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE367141F386F6C00171647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE3671F1F386F6C00171647 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11B400CC23306F2E3CF8A467 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-telnetIosApp/Pods-telnetIosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BC85AD57A8A300ACB278969 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-telnetIosApp/Pods-telnetIosApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7870C1022AA0CE6A76BA14C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CE366F91F386F6C00171647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CFD3CDA1F5901320047D584 /* PingFoundation.m in Sources */,
+				7CAF0C811F4AD7E6000B65DE /* QRCScannerViewController.m in Sources */,
+				7CDE09B61F56639300C3378B /* AppConst.m in Sources */,
+				7CAF0C791F4AD7D6000B65DE /* qrencode.c in Sources */,
+				7CFD3CD61F5901320047D584 /* ReachStateUnloaded.m in Sources */,
+				7CC737761F3AB5EC00113B3F /* GCDAsyncSocket.m in Sources */,
+				7CAF0C7A1F4AD7D6000B65DE /* qrinput.c in Sources */,
+				7CAF0C7E1F4AD7D6000B65DE /* UIImage+MDQRCode.m in Sources */,
+				7CAF0C771F4AD7D6000B65DE /* bitstream.c in Sources */,
+				7CDE09BA1F56B5F000C3378B /* smallSwitch.m in Sources */,
+				7CAF0C7D1F4AD7D6000B65DE /* split.c in Sources */,
+				7CFD3CD11F5901320047D584 /* LocalConnection.m in Sources */,
+				7CFD3CD51F5901320047D584 /* ReachStateLoading.m in Sources */,
+				7C807A581F5561E600164670 /* ipModel.m in Sources */,
+				7CC737701F3AB4F700113B3F /* UIViewController+DismissKeyboard.m in Sources */,
+				7CDE09BD1F56C08B00C3378B /* cofigInfo.m in Sources */,
+				7CE367391F38704900171647 /* MainTableViewController.m in Sources */,
+				7CE3673C1F38763600171647 /* TelnetTableViewController.m in Sources */,
+				7CFD3CD21F5901320047D584 /* FSMEngine.m in Sources */,
+				7CFD3CDB1F5901320047D584 /* PingHelper.m in Sources */,
+				7CFD3CD91F5901320047D584 /* ReachStateWWAN.m in Sources */,
+				7CAF0CD31F4D1A02000B65DE /* cloudAndPwdAlertView.m in Sources */,
+				7CFD3CDD1F5901320047D584 /* RealReachability.m in Sources */,
+				7CE7CB901F4EBCA4009787BA /* ConfigTableViewController.m in Sources */,
+				7CDE09B31F56633800C3378B /* BaseNavViewController.m in Sources */,
+				7CC7377A1F3AB5FA00113B3F /* YSSocketProtocol.m in Sources */,
+				7CAF0C761F4AD7D6000B65DE /* QRCScanner.m in Sources */,
+				7CC737771F3AB5EC00113B3F /* GCDAsyncUdpSocket.m in Sources */,
+				7CFD3CD31F5901320047D584 /* FSMStateUtil.m in Sources */,
+				7CAF0CCD1F4C0C9D000B65DE /* SSIDTool.m in Sources */,
+				7CAF0CD81F4D2963000B65DE /* UIView+Toast.m in Sources */,
+				7C807A551F555CB300164670 /* TelDataBase.m in Sources */,
+				7CFD3CD41F5901320047D584 /* ReachState.m in Sources */,
+				7CFD3CD81F5901320047D584 /* ReachStateWIFI.m in Sources */,
+				7CE367051F386F6C00171647 /* AppDelegate.m in Sources */,
+				7CFD3CD71F5901320047D584 /* ReachStateUnReachable.m in Sources */,
+				7C807A5C1F5659E000164670 /* MainTableViewCell.m in Sources */,
+				7CAF0C7B1F4AD7D6000B65DE /* qrspec.c in Sources */,
+				7CE7CB931F4EC9E3009787BA /* popViewController.m in Sources */,
+				7CE367021F386F6C00171647 /* main.m in Sources */,
+				7CAF0C7C1F4AD7D6000B65DE /* rscode.c in Sources */,
+				7C807A601F565FDD00164670 /* Config.m in Sources */,
+				7CFD3CDC1F5901320047D584 /* README.md in Sources */,
+				7CAF0C781F4AD7D6000B65DE /* mask.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE367121F386F6C00171647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE3671B1F386F6C00171647 /* telnetIosAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CE3671D1F386F6C00171647 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE367261F386F6C00171647 /* telnetIosAppUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7CE367181F386F6C00171647 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CE366FC1F386F6C00171647 /* telnetIosApp */;
+			targetProxy = 7CE367171F386F6C00171647 /* PBXContainerItemProxy */;
+		};
+		7CE367231F386F6C00171647 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CE366FC1F386F6C00171647 /* telnetIosApp */;
+			targetProxy = 7CE367221F386F6C00171647 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7CE367091F386F6C00171647 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE3670A1F386F6C00171647 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		7CE3670E1F386F6C00171647 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE3670F1F386F6C00171647 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7CE367281F386F6C00171647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7CE367291F386F6C00171647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CE3672B1F386F6C00171647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58B451F93119C9119D1CB594 /* Pods-telnetIosApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5A5VHB7889;
+				INFOPLIST_FILE = telnetIosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.telnet.Connect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		7CE3672C1F386F6C00171647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5BD2D1822D2F48C97E8AAC3 /* Pods-telnetIosApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5A5VHB7889;
+				INFOPLIST_FILE = telnetIosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.telnet.Connect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		7CE3672E1F386F6C00171647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = telnetIosAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyc.telnetIosAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/telnetIosApp.app/telnetIosApp";
+			};
+			name = Debug;
+		};
+		7CE3672F1F386F6C00171647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = telnetIosAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyc.telnetIosAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/telnetIosApp.app/telnetIosApp";
+			};
+			name = Release;
+		};
+		7CE367311F386F6C00171647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = telnetIosAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyc.telnetIosAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = telnetIosApp;
+			};
+			name = Debug;
+		};
+		7CE367321F386F6C00171647 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = telnetIosAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jiangyc.telnetIosAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = telnetIosApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CE366F81F386F6C00171647 /* Build configuration list for PBXProject "telnetIosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE367281F386F6C00171647 /* Debug */,
+				7CE367291F386F6C00171647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CE3672A1F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE3672B1F386F6C00171647 /* Debug */,
+				7CE3672C1F386F6C00171647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CE3672D1F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE3672E1F386F6C00171647 /* Debug */,
+				7CE3672F1F386F6C00171647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CE367301F386F6C00171647 /* Build configuration list for PBXNativeTarget "telnetIosAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE367311F386F6C00171647 /* Debug */,
+				7CE367321F386F6C00171647 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CE366F51F386F6C00171647 /* Project object */;
+}
