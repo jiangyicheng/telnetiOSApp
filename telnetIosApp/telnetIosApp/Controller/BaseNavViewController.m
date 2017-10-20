@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+//    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -180) forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setBarTintColor:getColor(@"439ff2")];
     [self.navigationBar setTranslucent:NO];
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -57,6 +57,18 @@
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationBar.backIndicatorImage = image;
     self.navigationBar.backIndicatorTransitionMaskImage = image;
+}
+
+- (BOOL)shouldAutorotate {
+    return self.topViewController.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.topViewController.supportedInterfaceOrientations;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.topViewController.preferredStatusBarStyle;
 }
 
 - (void)didReceiveMemoryWarning {

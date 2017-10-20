@@ -42,6 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"运维工具";
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
     [self setUpTableview];
     
     UIBarButtonItem* connertorItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"connertor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(connertorCilck)];

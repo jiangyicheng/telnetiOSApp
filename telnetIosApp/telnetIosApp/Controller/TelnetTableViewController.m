@@ -78,6 +78,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"connect";
+    
     [self setupForDismissKeyboard];
     _currentHost = self.hostTF.text;
     if (self.type == 2) {
