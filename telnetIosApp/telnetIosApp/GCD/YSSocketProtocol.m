@@ -94,11 +94,11 @@
 
 #pragma mark - GCDAsyncSocketDelegate
 - (void)socket:(GCDAsyncSocket*)sock didConnectToHost:(NSString*)host port:(UInt16)port{
-    NSLog(@"连接成功");
     [SVProgressHUD dismiss];
-    [SVProgressHUD showSuccessWithStatus:@"连接成功"];
+//    [SVProgressHUD showSuccessWithStatus:@"连接成功"];
     [self initBool];
     [_asyncSocket readDataWithTimeout:-1 tag:0];
+    [_asyncSocket writeData:[@"admin\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:11];
 }
 
 
@@ -108,6 +108,11 @@
 //    if (self.disConectType != 1) {
         [SVProgressHUD showErrorWithStatus:@"连接失败"];
 //    }
+    [self performSelectorOnMainThread:@selector(popLastPage) withObject:nil waitUntilDone:YES];
+    
+}
+-(void)popLastPage
+{
     UINavigationController* nav = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
     if ([nav.topViewController isKindOfClass:[ConfigTableViewController class]]) {
         [SVProgressHUD dismiss];
@@ -132,12 +137,6 @@
     
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"result-%@",result);
-//    if (!result) {
-//        return;
-//    }
-//    if (result ) {
-//        <#statements#>
-//    }
     [_asyncSocket readDataWithTimeout:-1 tag:tag];
     [self getData:result andTag:tag];
 }
@@ -174,8 +173,6 @@ BOOL isSendSuccess = NO;
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_pppoe_user] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_pppoe_pass] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     }else if ([[cofigInfo sharedInstance].set_wanConnectionMode containsString:@"STATIC"]){
-#warning /*<---注意------>*/
-//        return;
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_ipaddr] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_netmask] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_gateway] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
@@ -201,14 +198,18 @@ BOOL isSendSuccess = NO;
 //    [_asyncSocket writeData:[@"/sbin/lan.sh start 1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
 //    [_asyncSocket writeData:[@"/sbin/nat.sh 1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     isSendSuccess = YES;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SVProgressHUD showWithStatus:@"上传中..."];
     });
 }
 
 BOOL isPPPOE = NO;
+BOOL isDhcpSecDns9Return = NO;
 -(void)getData:(NSString*)result andTag:(long)tag
 {
+    if ([result containsString:@"dhcpSecDns9"]  && [result containsString:@"#"]) {
+        isDhcpSecDns9Return = YES;
+    }
     if ([result containsString:@"nvram_set"]) {
         return;
     }
@@ -224,8 +225,9 @@ BOOL isPPPOE = NO;
         return;
     }
 
-    if ([result isEqualToString:@"# "] && isSendSuccess) {
+    if ([result isEqualToString:@"# "] && isSendSuccess && isDhcpSecDns9Return) {
         isSendSuccess = NO;
+        isDhcpSecDns9Return = NO;
         [SVProgressHUD dismiss];
         [SVProgressHUD showSuccessWithStatus:@"配置成功！"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -233,6 +235,7 @@ BOOL isPPPOE = NO;
         });
         return;
     }else if([result isEqualToString:@"# "]){
+        [SVProgressHUD dismiss];
         return;
     }
     if ([result containsString:@"Password"]) {
@@ -344,8 +347,9 @@ BOOL isPPPOE = NO;
     else if ([result containsString:@"nvram_get wanConnectionMode"]){
         result = [self dealString:result andReplaceString:@"nvram_get wanConnectionMode"];
         [cofigInfo sharedInstance].wanConnectionMode = result;
-        if (!result) {
-            [_asyncSocket writeData:[@"nvram_get wanConnectionMode\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+        if (![result containsString:@"PPPOE"] || ![result containsString:@"DHCP"] || ![result containsString:@"STATIC"] ) {
+//            [_asyncSocket writeData:[@"nvram_get wanConnectionMode\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+            [self updateDonfigData];
         }else{
             [_asyncSocket writeData:[@"nvram_get wan_ipaddr\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
         }
@@ -488,7 +492,7 @@ BOOL isPPPOE = NO;
         [cofigInfo sharedInstance].wan_pppoe_user = result;
         NSLog(@"wan_pppoe_user----%@",[cofigInfo sharedInstance].wan_pppoe_user);
         [_asyncSocket writeData:[@"nvram_get wan_pppoe_pass\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:28];
-    }else if (wan_pppoe_pass){
+    }else if (wan_pppoe_pass && !isSendSuccess){
         [cofigInfo sharedInstance].wan_pppoe_pass = result;
         NSLog(@"wan_pppoe_pass----%@",[cofigInfo sharedInstance].wan_pppoe_pass);
         [self dealFinish];

@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpTableview];
+    NSLog(@"frame--%@",NSStringFromCGRect(self.view.frame));
     // Do any additional setup after loading the view.
 }
 
@@ -48,9 +49,20 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = self.titleArr[indexPath.row];
-    cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    CGRect labFrame = CGRectZero;
+    if (self.type == PopTypeMode) {
+        labFrame = CGRectMake(0, 0, 100, 40);
+    }else if (self.type == PopTypeServiceBland){
+        labFrame = CGRectMake(0, 0, 180, 40);
+    }
+    UILabel* titleLabel = [[UILabel alloc]initWithFrame:labFrame];
+    titleLabel.text = self.titleArr[indexPath.row];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont systemFontOfSize:15];
+    [cell.contentView addSubview:titleLabel];
+//    cell.textLabel.text = self.titleArr[indexPath.row];
+//    cell.textLabel.textAlignment = NSTextAlignmentLeft;
+//    cell.textLabel.font = [UIFont systemFontOfSize:15];
     return cell;
 }
 

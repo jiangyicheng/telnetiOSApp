@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "baseViewController.h"
 @protocol QRCodeScannerViewControllerDelegate <NSObject>
 /**
  *  扫描成功后返回扫描结果
@@ -18,7 +17,7 @@
 
 @end
 
-@interface QRCScannerViewController :baseViewController
+@interface QRCScannerViewController :UIViewController
 
 @property (nonatomic,assign) id<QRCodeScannerViewControllerDelegate> delegate;
 

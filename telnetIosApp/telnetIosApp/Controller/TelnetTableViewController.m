@@ -87,6 +87,7 @@
 }
 
 - (IBAction)linkClick:(UIButton *)sender {
+
     [self getWifiName];
     if (![self.wifiName isEqualToString:_currentWifiName] && self.type != 3) {
         [self alertWithMessage:[NSString stringWithFormat:@"请连接到%@",self.wifiName]];
@@ -108,19 +109,19 @@
     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
     "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];//^[a-zA-Z0-9]|[@  .  -   _]{1,31}$
     BOOL hostIsValid = [predicate evaluateWithObject:self.hostTF.text];
     if (!hostIsValid) {
         [self alertWithMessage:@"请输入正确的主机名或IP地址"];
         return;
     }
-    
+
     if (![_currentHost isEqualToString:_hostTF.text]) {
         [[YSSocketProtocol shareSocketProtocol]disConnectToHost];
         [YSSocketProtocol shareSocketProtocol].asyncSocket = nil;
         sleep(1);
     }
-    
+
 //    @"192.168.1.1" 8062
     if ([[YSSocketProtocol shareSocketProtocol]isConnect]) {
         [YSSocketProtocol shareSocketProtocol].isPush = YES;

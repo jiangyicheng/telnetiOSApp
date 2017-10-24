@@ -299,16 +299,86 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - 提示框
+-(void)alertWithMessage:(NSString*)message
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 //刷新配置信息
 -(void)refreshPage
 {
     [[YSSocketProtocol shareSocketProtocol]updateDonfigData];
 }
 
+-(BOOL)vaildTextfieldTextwithText:(NSString*)text
+{
+    NSString *regex = @"^([- _ @ .]|[A-Za-z0-9]){1,31}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL hostIsValid = [predicate evaluateWithObject:text];
+    return hostIsValid;
+}
+
+-(BOOL)vaildNUMwithText:(NSString*)text
+{
+    NSString *regex = @"^[0-9]{1,31}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL hostIsValid = [predicate evaluateWithObject:text];
+    return hostIsValid;
+}
+
 -(void)commitPage
 {
 //    [self getWifiName];
 //    if ([_currentWifiName isEqualToString:self.wifiName]) {
+    if ([self.connectStyleBtn.titleLabel.text containsString:@"PPPOE"]) {
+        if (![self vaildTextfieldTextwithText:self.userNameTF.text]) {
+            [self alertWithMessage:@"请检查用户名输入是否有误"];
+            return;
+        }
+        if (![self vaildTextfieldTextwithText:self.passWordTF.text]) {
+            [self alertWithMessage:@"请检查密码输入是否有误"];
+            return;
+        }
+    }else if ([self.connectStyleBtn.titleLabel.text containsString:@"STATIC"]){
+        if (![self vaildTextfieldTextwithText:self.ipTF.text]) {
+            [self alertWithMessage:@"请检查IP地址输入是否有误"];
+            return;
+        }
+        if (![self vaildTextfieldTextwithText:self.yanmaTF.text]) {
+            [self alertWithMessage:@"请检查子网掩码输入是否有误"];
+            return;
+        }
+        if (![self vaildTextfieldTextwithText:self.wangguanTF.text]) {
+            [self alertWithMessage:@"请检查缺省网关输入是否有误"];
+            return;
+        }
+        if (![self vaildTextfieldTextwithText:self.firstDNSTF.text]) {
+            [self alertWithMessage:@"请检查首选DNS服务输入是否有误"];
+            return;
+        }
+        if (![self vaildTextfieldTextwithText:self.reserveDNSTF.text]) {
+            [self alertWithMessage:@"请检查备用DNS服务器输入是否有误"];
+            return;
+        }
+    }else if ([self.connectStyleBtn.titleLabel.text containsString:@"DHCP"]){
+        if ((_function60Lab.text.length == 0) && _funSW.isOn) {
+            [self alertWithMessage:@"请设置Option60"];
+            return;
+        }
+    }
+    
+    if (![self vaildNUMwithText:self.VLANIDLab.text]) {
+        [self alertWithMessage:@"请检查VLAN ID输入是否有误"];
+        return ;
+    }
+    if (![self vaildNUMwithText:self.priorityLab.text]) {
+        [self alertWithMessage:@"请检查优先级输入是否有误"];
+        return;
+    }
         [cofigInfo sharedInstance].set_wan_ipaddr = [NSString stringWithFormat:@"nvram_set wan_ipaddr %@",_ipTF.text];
         NSLog(@"set_wan_ipaddr==%@",[cofigInfo sharedInstance].set_wan_ipaddr);
         
@@ -434,7 +504,7 @@
         if (indexPath.row == 3) {
             [self alertVCWithMessage:@"有效值为 2-4080,4082-4095"];
         }else if (indexPath.row == 4) {
-            [self alertVCWithMessage:@"优先级"];
+            [self alertVCWithMessage:@"优先级为0-7"];
         }
     }
 }
@@ -471,7 +541,14 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UITextField * userNameTextField = alertController.textFields.firstObject;
+        if (![self vaildTextfieldTextwithText:userNameTextField.text]) {
+            [SVProgressHUD showErrorWithStatus:@"输入无效字符"];
+            return ;
+        }
         if ([message containsString:@"有效值为"]) {
+            if (userNameTextField.text.length == 0) {
+                return ;
+            }
             NSInteger vlanId = [userNameTextField.text integerValue];
             if (vlanId < 2 || vlanId > 4095 || (vlanId == 4081)) {
                 [SVProgressHUD showErrorWithStatus:@"该VLAN ID无效"];
@@ -487,6 +564,9 @@
             }
             
         }else if ([message containsString:@"优先级"]){
+            if (userNameTextField.text.length == 0) {
+                return;
+            }
             NSInteger vlanId = [userNameTextField.text integerValue];
             if (vlanId < 0 || vlanId > 7) {
                 [SVProgressHUD showErrorWithStatus:@"该优先级的值无效"];
@@ -496,6 +576,13 @@
             [cofigInfo sharedInstance].set_Service1VlanPri = [NSString stringWithFormat:@"nvram_set Service1VlanPri \"%@\"",userNameTextField.text];
             NSLog(@"set_Service1VlanPri == %@" ,[cofigInfo sharedInstance].set_Service1VlanPri);
         }else if ([message containsString:@"设置Option60"]){
+            if (userNameTextField.text.length > 31) {
+                [SVProgressHUD showErrorWithStatus:@"该Option60的值无效"];
+                return;
+            }
+            if (userNameTextField.text.length == 0) {
+                return;
+            }
             self.function60Lab.text = userNameTextField.text;
             [cofigInfo sharedInstance].set_wan_vendor = [NSString stringWithFormat:@"nvram_set wan_vendor %@",userNameTextField.text];
             NSLog(@"set_wan_vendor == %@" ,[cofigInfo sharedInstance].set_wan_vendor);
@@ -721,7 +808,7 @@
             make.right.equalTo(_DHCPView.right).offset(-20);
         }];
         [_function60Lab makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_DHCPView.left).offset(0);
+            make.left.equalTo(_functionLab.right).offset(5);
             make.top.equalTo(_functionLab.top).offset(10);
             make.right.equalTo(_DHCPView.right).offset(-20);
             make.bottom.equalTo(_DHCPView.bottom).offset(10);
@@ -733,7 +820,7 @@
         
         _function60Lab.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(function60Click)];
-        [_function60Lab addGestureRecognizer:tap];
+        [_DHCPView addGestureRecognizer:tap];
         _DHCPView.hidden = YES;
     }
     return _DHCPView;

@@ -103,7 +103,7 @@
     CGSize transparentArea = _transparentAreaSize;
     //中间清空的矩形框
     _clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - transparentArea.width / 2,
-                                      screenDrawRect.size.height / 2 - transparentArea.height / 2,
+                                      screenDrawRect.size.height / 2 - transparentArea.height / 2 ,
                                       transparentArea.width,transparentArea.height);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
