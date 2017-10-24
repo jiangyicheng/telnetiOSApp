@@ -114,6 +114,7 @@
 -(void)popLastPage
 {
     UINavigationController* nav = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    NSLog(@"%@",[nav class]);
     if ([nav.topViewController isKindOfClass:[ConfigTableViewController class]]) {
         [SVProgressHUD dismiss];
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -9,10 +9,12 @@
 #import "QRCScanner.h"
 #import <AVFoundation/AVFoundation.h>
 #import "UIImage+MDQRCode.h"
+#import "BaseNavViewController.h"
+#import "AppDelegate.h"
 
 #define LINE_SCAN_TIME  2.0     // 扫描线从上到下扫描所历时间（s）
 
-@interface QRCScanner() <AVCaptureMetadataOutputObjectsDelegate>
+@interface QRCScanner() <AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong)NSTimer *scanLineTimer;
 @property (nonatomic,strong)UIView *scanLine;
@@ -294,6 +296,13 @@
     // 条码类型 AVMetadataObjectTypeQRCode
     //_output.metadataObjectTypes =@[AVMetadataObjectTypeQRCode];
     
+    NSString *mediaType = AVMediaTypeVideo;
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"CCC" message:@"请在iPhone的“设置”-“隐私”-“相机”功能中，找到“XXXX”打开相机访问权限" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     //增加条形码扫描
     _output.metadataObjectTypes = @[AVMetadataObjectTypeEAN13Code,
                                     AVMetadataObjectTypeEAN8Code,
@@ -307,6 +316,13 @@
     [parentView.layer insertSublayer:_preview atIndex:0];
     
     [_session startRunning];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    AppDelegate *appdelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UINavigationController *rootViewController = (id)appdelegate.window.rootViewController;
+    [rootViewController popViewControllerAnimated:YES];
 }
 
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
