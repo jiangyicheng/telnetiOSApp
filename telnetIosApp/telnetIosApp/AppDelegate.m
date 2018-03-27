@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "RealReachability.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,26 @@
 
 @implementation AppDelegate
 
+#pragma mark - 设置屏幕横竖屏
+//_allowRotation = 1 时 屏幕支持横屏
+//_allowRotation = 2 时 屏幕支持竖屏
+//否则的话横竖屏都支持
+-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (_allowRotation == 1) {
+        return UIInterfaceOrientationMaskLandscapeRight;
+    }
+    else if(_allowRotation == 2)
+    {
+        return (UIInterfaceOrientationMaskPortrait);
+    }
+    return UIInterfaceOrientationMaskAll;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [GLobalRealReachability startNotifier];
     return YES;
 }
 

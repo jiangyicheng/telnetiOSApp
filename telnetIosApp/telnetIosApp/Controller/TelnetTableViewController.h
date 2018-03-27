@@ -22,4 +22,7 @@
 /**  type  1 点击列表进入 2 扫码进入 3 点击导航栏图标进入 */
 @property(nonatomic,assign)NSInteger type;
 
+-(NSString*)getFtpUserName;
+-(NSString*)getFtpPWD;
+
 @end

@@ -15,6 +15,10 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "Config.h"
 #import "appColor.h"
+#import "XMFTPServer.h"
+#import "NSString+XP.h"
+#import "FTPManager.h"
+
 
 @interface TelnetTableViewController ()
 {
@@ -26,11 +30,22 @@
 @property (weak, nonatomic) IBOutlet UIButton *linkBtn;
 /**  popview */
 @property(nonatomic,strong)cloudAndPwdAlertView* alertView;
+@property (nonatomic, strong) XMFTPServer *ftpServer;
 
 @end
 
 @implementation TelnetTableViewController
 
+#pragma mark - paras for ftpConnection
+
+-(NSString*)getFtpUserName
+{
+    return @"123";
+}
+-(NSString*)getFtpPWD
+{
+    return @"123";
+}
 #pragma mark - setter
 
 -(cloudAndPwdAlertView *)alertView
@@ -83,6 +98,39 @@
     _currentHost = self.hostTF.text;
     if (self.type == 2) {
         [self.alertView pop];
+    }
+    [self startFtp];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self stopFTPServer];
+}
+
+#pragma mark - 配置FTP
+//开启FTP
+-(void)startFtp
+{
+    unsigned int ftpPort = 23023;
+    NSString *ip = [XMFTPHelper localIPAddress];
+    if (![ip isIP]) {
+        [SVProgressHUD showErrorWithStatus:@"开启FTP服务失败"];
+    }
+    [self stopFTPServer];
+    NSString* str = [NSString stringWithFormat:@"ftp://%@:%d", ip, ftpPort];
+    NSLog(@"ip==%@",str);
+    _ftpServer = [[XMFTPServer alloc] initWithPort:ftpPort
+                                           withDir:NSTemporaryDirectory()
+                                      notifyObject:nil];
+    _ftpServer.clientEncoding = NSUTF8StringEncoding;
+}
+
+//关闭Ftp
+- (void)stopFTPServer {
+    if (_ftpServer) {
+        [_ftpServer stopFtpServer];
+        _ftpServer = nil;
     }
 }
 

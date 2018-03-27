@@ -14,6 +14,11 @@
 
 #define LINE_SCAN_TIME  2.0     // 扫描线从上到下扫描所历时间（s）
 
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+#define WIDTH [UIScreen mainScreen].bounds.size.width
+#define realWidth (WIDTH > HEIGHT) ? HEIGHT : WIDTH
+#define realHeight (WIDTH < HEIGHT) ? HEIGHT : WIDTH
+
 @interface QRCScanner() <AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong)NSTimer *scanLineTimer;
@@ -34,7 +39,7 @@
 @implementation QRCScanner
 #pragma mark - 初始化
 - (instancetype)initQRCScannerWithView:(UIView *)view{
-    QRCScanner *qrcView = [[QRCScanner alloc]initWithFrame:view.frame];
+    QRCScanner *qrcView = [[QRCScanner alloc]initWithFrame:CGRectMake(0, 0, realWidth, realHeight)];
     [qrcView initDataWithView:view];
     return qrcView;
 }
@@ -97,6 +102,7 @@
 #pragma mark - UI
 #pragma mark 私有方法
 - (void)updateLayout{
+//    CGRect screenRect = [UIScreen mainScreen].bounds;
     CGRect screenRect = [UIScreen mainScreen].bounds;
     //整个二维码扫描界面的颜色
     CGSize screenSize = screenRect.size;
@@ -104,7 +110,7 @@
     
     CGSize transparentArea = _transparentAreaSize;
     //中间清空的矩形框
-    _clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - transparentArea.width / 2,
+    _clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - transparentArea.width / 2 ,
                                       screenDrawRect.size.height / 2 - transparentArea.height / 2 ,
                                       transparentArea.width,transparentArea.height);
     
@@ -123,21 +129,29 @@
 }
 #pragma mark 添加提示提心Lable
 - (void)addNoticeInfoLable:(CGRect)rect{
-    _noticeInfoLable = [[UILabel alloc]initWithFrame:CGRectMake(0, (rect.origin.y + rect.size.height+10), self.bounds.size.width, 20)];
-    [_noticeInfoLable setText:@"将二维码/条形码放入取景框中即可自动扫描"];
-    _noticeInfoLable.font = [UIFont systemFontOfSize:15];
-    [_noticeInfoLable setTextColor:[UIColor whiteColor]];
-    _noticeInfoLable.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:_noticeInfoLable];
+    if (!_noticeInfoLable) {
+        _noticeInfoLable = [[UILabel alloc]initWithFrame:CGRectMake(0, (rect.origin.y + rect.size.height+10), self.bounds.size.width, 20)];
+        [_noticeInfoLable setText:@"将二维码/条形码放入取景框中即可自动扫描"];
+        _noticeInfoLable.font = [UIFont systemFontOfSize:15];
+        [_noticeInfoLable setTextColor:[UIColor whiteColor]];
+        _noticeInfoLable.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_noticeInfoLable];
+    }
+    
+    _noticeInfoLable.frame = CGRectMake(0, (rect.origin.y + rect.size.height+10), self.bounds.size.width, 20);
+    
 }
 #pragma mark 添加手电筒功能按钮
 - (void)addLightButton:(CGRect)rect{
-    _lightButton = [[UIButton alloc]initWithFrame:CGRectMake((self.bounds.size.width - 80)/2, (rect.origin.y + rect.size.height+40), 80, 30)];
-    [_lightButton setTitle:@"打开照明" forState:UIControlStateNormal];
-    [_lightButton addTarget:self action:@selector(torchSwitch:) forControlEvents:UIControlEventTouchUpInside];
-    [_lightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _isOn = NO;
-    [self addSubview:_lightButton];
+    if (!_lightButton) {
+        _lightButton = [[UIButton alloc]initWithFrame:CGRectMake((self.bounds.size.width - 80)/2, (rect.origin.y + rect.size.height+40), 80, 30)];
+        [_lightButton setTitle:@"打开照明" forState:UIControlStateNormal];
+        [_lightButton addTarget:self action:@selector(torchSwitch:) forControlEvents:UIControlEventTouchUpInside];
+        [_lightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _isOn = NO;
+        [self addSubview:_lightButton];
+    }
+    _lightButton.frame = CGRectMake((self.bounds.size.width - 80)/2, (rect.origin.y + rect.size.height+40), 80, 30);
 }
 #pragma mark 画背景
 - (void)addScreenFillRect:(CGContextRef)ctx rect:(CGRect)rect {
@@ -158,9 +172,12 @@
 }
 #pragma mark 画扫描线
 - (void)addScanLine:(CGRect)rect{
-    self.scanLine = [[UIView alloc]initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 1)];
-    self.scanLine.backgroundColor = _scanningLieColor;
-    [self addSubview:self.scanLine];
+    if (!self.scanLine) {
+        self.scanLine = [[UIView alloc]initWithFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 1)];
+        self.scanLine.backgroundColor = _scanningLieColor;
+        [self addSubview:self.scanLine];
+    }
+    self.scanLine.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 1);
 }
 #pragma mark 画框的四个角
 - (void)addCornerLineWithContext:(CGContextRef)ctx rect:(CGRect)rect{
@@ -299,7 +316,7 @@
     NSString *mediaType = AVMediaTypeVideo;
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
     if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
-        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"CCC" message:@"请在iPhone的“设置”-“隐私”-“相机”功能中，找到“XXXX”打开相机访问权限" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"请在iPhone的“设置”-“运维工具”-“相机”功能中，打开相机访问权限" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alert show];
         return;
     }
@@ -312,7 +329,10 @@
     // Preview
     _preview =[AVCaptureVideoPreviewLayer layerWithSession:_session];
     _preview.videoGravity =AVLayerVideoGravityResize;
-    [_preview setFrame:parentView.bounds];
+//    AVCaptureVideoOrientation oriention = [UIDevice currentDevice].orientation;
+//    AVCaptureVideoOrientation interfaceOriention = (UIInterfaceOrientation)oriention;
+    _preview.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+    [_preview setFrame:CGRectMake(0, 0, realWidth, realHeight)];
     [parentView.layer insertSublayer:_preview atIndex:0];
     
     [_session startRunning];

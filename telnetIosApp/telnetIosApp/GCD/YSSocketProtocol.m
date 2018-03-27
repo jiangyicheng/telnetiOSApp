@@ -11,15 +11,23 @@
 #import <SVProgressHUD.h>
 #import "ConfigTableViewController.h"
 #import "cofigInfo.h"
+#import "FTPManager.h"
+#import "XMFTPServer.h"
+#import "appColor.h"
 
 //#define HOST @"10.58.201.124"
 //#define PORT 1234 yst.cjtc.net.cn   118.178.58.178   118.178.135.12
 
 #define HOST @"123.206.125.221"
 #define PORT 8062
+#define FTPURL        @"192.168.1.70"
+#define FTPUsername   @"abc123"
+#define FTPPSW        @"abc123"
 
-@interface YSSocketProtocol ()
+@interface YSSocketProtocol ()<FTPManagerDelegate>
 {
+    BOOL version;
+    BOOL versionDate;
     BOOL Service1Enable;
     BOOL Service1name;
     BOOL Service1Servicelist;
@@ -38,9 +46,16 @@
     BOOL wan_pppoe_user;
     BOOL wan_pppoe_pass;
     BOOL pppoeerrcode;
-    
+    BOOL getSSID;
+    BOOL getWPAPSK1;
+    FMServer* server;
+    FTPManager* man;
+    NSString* filePath;  // 上传文件的路径
+    BOOL succeeded;  // 记录传输结果是否成功
+    NSTimer* progTimer;
     
 }
+@property (nonatomic, strong) XMFTPServer *ftpServer;
 @end
 
 @implementation YSSocketProtocol
@@ -63,6 +78,14 @@
     }
     return _asyncSocket;
 }
+
+#pragma mark - 配置FTP
+
+
+
+#pragma mark - end
+
+
 
 - (void)socketConnectWithHost:(NSString *)host andPort:(uint16_t)port{
     NSError *err = nil;
@@ -168,7 +191,8 @@ BOOL isSendSuccess = NO;
     [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_Service1VlanPri] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_Service1Portmap] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
     [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wanConnectionMode] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
-    
+    [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].setSSID] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+    [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].setWPAPSK1] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
 
     if ([[cofigInfo sharedInstance].set_wanConnectionMode containsString:@"PPPOE"]) {
         [_asyncSocket writeData:[[self configString:[cofigInfo sharedInstance].set_wan_pppoe_user] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
@@ -204,8 +228,73 @@ BOOL isSendSuccess = NO;
     });
 }
 
+/**
+ 比较两个版本号的大小
+ 
+ @param v1 第一个版本号
+ @param v2 第二个版本号
+ @return 版本号相等,返回0; v1小于v2,返回-1; 否则返回1.
+ */
+- (NSInteger)compareVersion:(NSString *)v1 to:(NSString *)v2 {
+    // 都为空，相等，返回0
+    if (!v1 && !v2) {
+        return 0;
+    }
+    
+    // v1为空，v2不为空，返回-1
+    if (!v1 && v2) {
+        return -1;
+    }
+    
+    // v2为空，v1不为空，返回1
+    if (v1 && !v2) {
+        return 1;
+    }
+    
+    // 获取版本号字段
+    NSArray *v1Array = [v1 componentsSeparatedByString:@"."];
+    NSArray *v2Array = [v2 componentsSeparatedByString:@"."];
+    // 取字段最少的，进行循环比较
+    NSInteger smallCount = (v1Array.count > v2Array.count) ? v2Array.count : v1Array.count;
+    
+    for (int i = 0; i < smallCount; i++) {
+        NSInteger value1 = [[v1Array objectAtIndex:i] integerValue];
+        NSInteger value2 = [[v2Array objectAtIndex:i] integerValue];
+        if (value1 > value2) {
+            // v1版本字段大于v2版本字段，返回1
+            return 1;
+        } else if (value1 < value2) {
+            // v2版本字段大于v1版本字段，返回-1
+            return -1;
+        }
+        
+        // 版本相等，继续循环。
+    }
+    
+    // 版本可比较字段相等，则字段多的版本高于字段少的版本。
+    if (v1Array.count > v2Array.count) {
+        return 1;
+    } else if (v1Array.count < v2Array.count) {
+        return -1;
+    } else {
+        return 0;
+    }
+    
+    return 0;
+}
+//是否需要升级
+-(BOOL)isNeedUpdateVersion{
+    NSInteger result = [self compareVersion:[cofigInfo sharedInstance].version to:@"1.10.2.1"];
+    if (result == -1) {//1.10.2.1  版本大
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 BOOL isPPPOE = NO;
 BOOL isDhcpSecDns9Return = NO;
+BOOL isNeedUpdate = NO;
 -(void)getData:(NSString*)result andTag:(long)tag
 {
     if ([result containsString:@"dhcpSecDns9"]  && [result containsString:@"#"]) {
@@ -225,6 +314,17 @@ BOOL isDhcpSecDns9Return = NO;
         NSLog(@"pppoeerrcode----%@",[cofigInfo sharedInstance].pppoeerrcode);
         return;
     }
+    if ([result containsString:@"Reset"]) {
+        [SVProgressHUD showSuccessWithStatus:@"更新完成"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UINavigationController* nav = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+            [nav popToRootViewControllerAnimated:YES];
+        });
+        return;
+    }
+    if ([result containsString:@"^"]) {
+        NSLog(@"升级中");
+    }
 
     if ([result isEqualToString:@"# "] && isSendSuccess && isDhcpSecDns9Return) {
         isSendSuccess = NO;
@@ -235,10 +335,13 @@ BOOL isDhcpSecDns9Return = NO;
             [self updateDonfigData];
         });
         return;
-    }else if([result isEqualToString:@"# "]){
+    }else if([result isEqualToString:@"# "] && !isNeedUpdate){
         [SVProgressHUD dismiss];
         return;
+    }else if ([result isEqualToString:@"# "] && isNeedUpdate){//正在升级
+        return;
     }
+    
     if ([result containsString:@"Password"]) {
         [_asyncSocket writeData:[@"1qaz2wsx\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:10];
     }else if ([result containsString:@"login"]){
@@ -247,10 +350,55 @@ BOOL isDhcpSecDns9Return = NO;
         }
         [_asyncSocket writeData:[@"admin\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:11];
     }else if ([result containsString:@"BusyBox"]){
-        [SVProgressHUD showWithStatus:@"正在刷新..."];
+        [SVProgressHUD showWithStatus:@"正在检测当前版本..."];
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-        [_asyncSocket writeData:[@"nvram_get Service1Enable\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+        [_asyncSocket writeData:[@"cat /bstar/version\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:11];
+//        [_asyncSocket writeData:[@"nvram_get Service1Enable\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
     }
+    else if ([result containsString:@"cat /bstar/version"] && ![result containsString:@"#"]){
+        version = YES;
+        return;
+    }else if ([result containsString:@"cat /bstar/version"]){
+        result = [self dealString:result andReplaceString:@"cat /bstar/version"];
+        [cofigInfo sharedInstance].version = result;
+        if ([self isNeedUpdateVersion]) {
+            [SVProgressHUD showWithStatus:@"正在升级..."];
+//            [_asyncSocket writeData:[@"cd /tmp/\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+            isNeedUpdate = YES;
+            NSString *ip = [XMFTPHelper localIPAddress];
+            NSString* updatestr = [NSString stringWithFormat:@"ftpget -u 123 -p 123 %@:23023 /tmp/upgrade %@.upf\n",ip,updateHigeFileName];
+            NSLog(@"updatestr--%@",updatestr);
+            //@"ftpget -u 123 -p 123 192.168.1.70:23023 /tmp/upgrade  WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf\n"
+            [_asyncSocket writeData:[updatestr dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [_asyncSocket writeData:[@"ls /tmp/upgrade\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+                [_asyncSocket writeData:[@"upf_upgrade -k /tmp/upgrade\r" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+            });
+            NSLog(@"开始升级");
+        }else{
+            NSLog(@"不需要升级");
+            [_asyncSocket writeData:[@"nvram_get Service1Enable\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+        }
+        return;
+    }
+//    else if ([result containsString:@"cat /tmp/bd"] && ![result containsString:@"#"]){
+//        versionDate = YES;
+//        return;
+//    }else if ([result containsString:@"cat /tmp/bd"]){
+//        result = [self dealString:result andReplaceString:@"cat /tmp/bd"];
+//        [cofigInfo sharedInstance].versionDate = result;
+////        [_asyncSocket writeData:[@"cat /tmp/bd\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:19];
+//        NSLog(@"versiondate----%@",result);
+//        if ([self isNeedUpdateVersion]) {
+//            [SVProgressHUD showWithStatus:@"正在升级..."];
+//            NSLog(@"开始升级");
+//        }else{
+//            NSLog(@"不需要升级");
+//            [SVProgressHUD showWithStatus:@"正在刷新..."];
+//            [_asyncSocket writeData:[@"nvram_get Service1Enable\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+//        }
+//        return;
+//    }
     else if ([result containsString:@"nvram_get Service1Enable"] && ![result containsString:@"#"]){
         Service1Enable = YES;
         return;
@@ -414,6 +562,29 @@ BOOL isDhcpSecDns9Return = NO;
     else if ([result containsString:@"nvram_get wan_pppoe_user"]){
         result = [self dealString:result andReplaceString:@"nvram_get wan_pppoe_user"];
         [cofigInfo sharedInstance].wan_pppoe_user = result;
+//        [_asyncSocket writeData:[@"nvram_get wan_pppoe_pass\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+        [_asyncSocket writeData:[@"nvram_get SSID1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+        
+        return;
+    }
+    //新增SSID WPAP
+    else if ([result containsString:@"nvram_get SSID1"] && ![result containsString:@"#"]){
+        getSSID = YES;
+        return;
+    }
+    else if ([result containsString:@"nvram_get SSID1"]){
+        result = [self dealString:result andReplaceString:@"nvram_get SSID1"];
+        [cofigInfo sharedInstance].getSSID = result;
+        [_asyncSocket writeData:[@"nvram_get WPAPSK1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
+        return;
+    }
+    else if ([result containsString:@"nvram_get WPAPSK1"] && ![result containsString:@"#"]){
+        getWPAPSK1 = YES;
+        return;
+    }
+    else if ([result containsString:@"nvram_get WPAPSK1"]){
+        result = [self dealString:result andReplaceString:@"nvram_get WPAPSK1"];
+        [cofigInfo sharedInstance].getWPAPSK1 = result;
         [_asyncSocket writeData:[@"nvram_get wan_pppoe_pass\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:14];
         return;
     }
@@ -429,6 +600,17 @@ BOOL isDhcpSecDns9Return = NO;
     }
     
     result = [self dealString:result];
+    if (version && !Service1Enable) {
+        [cofigInfo sharedInstance].version = result;
+        if ([self isNeedUpdateVersion]) {
+            [SVProgressHUD showWithStatus:@"正在升级..."];
+            NSLog(@"开始升级");
+        }else{
+            NSLog(@"不需要升级");
+            [SVProgressHUD showWithStatus:@"正在刷新..."];
+            [_asyncSocket writeData:[@"nvram_get Service1Enable\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:12];
+        }
+    }
     if (Service1Enable && !Service1name) {
         [cofigInfo sharedInstance].Service1Enable = result;
         NSLog(@"Service1Enable----%@",[cofigInfo sharedInstance].Service1Enable);
@@ -489,11 +671,23 @@ BOOL isDhcpSecDns9Return = NO;
         [cofigInfo sharedInstance].wan_secondary_dns = result;
         NSLog(@"wan_secondary_dns----%@",[cofigInfo sharedInstance].wan_secondary_dns);
         [_asyncSocket writeData:[@"nvram_get wan_pppoe_user\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:27];
-    }else if (wan_pppoe_user && !wan_pppoe_pass){
+    }else if (wan_pppoe_user && !getSSID){
         [cofigInfo sharedInstance].wan_pppoe_user = result;
         NSLog(@"wan_pppoe_user----%@",[cofigInfo sharedInstance].wan_pppoe_user);
+        [_asyncSocket writeData:[@"nvram_get SSID1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:28];
+    }
+    //新增SSID WPAP
+    else if (getSSID && !getWPAPSK1){
+        [cofigInfo sharedInstance].getSSID = result;
+        NSLog(@"wan_pppoe_user----%@",[cofigInfo sharedInstance].getSSID);
+        [_asyncSocket writeData:[@"nvram_get WPAPSK1\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:28];
+    }
+    else if (getWPAPSK1 && !wan_pppoe_pass){
+        [cofigInfo sharedInstance].getWPAPSK1 = result;
+        NSLog(@"wan_pppoe_user----%@",[cofigInfo sharedInstance].getWPAPSK1);
         [_asyncSocket writeData:[@"nvram_get wan_pppoe_pass\n" dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:28];
-    }else if (wan_pppoe_pass && !isSendSuccess){
+    }
+    else if (wan_pppoe_pass && !isSendSuccess){
         [cofigInfo sharedInstance].wan_pppoe_pass = result;
         NSLog(@"wan_pppoe_pass----%@",[cofigInfo sharedInstance].wan_pppoe_pass);
         [self dealFinish];
@@ -560,6 +754,8 @@ BOOL isDhcpSecDns9Return = NO;
 
 -(void)initBool
 {
+    version = NO;
+    versionDate = NO;
     Service1Enable = NO;
     Service1name = NO;
     Service1Servicelist = NO;
@@ -578,6 +774,8 @@ BOOL isDhcpSecDns9Return = NO;
     wan_pppoe_user = NO;
     wan_pppoe_pass = NO;
     pppoeerrcode = NO;
+    getSSID = NO;
+    getWPAPSK1 = NO;
 }
 
 @end

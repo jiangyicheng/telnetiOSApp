@@ -81,4 +81,5 @@
  *  @return 二维码信息
  */
 + (NSString *)scQRReaderForImage:(UIImage *)qrimage NS_AVAILABLE_IOS(8_0);
+
 @end

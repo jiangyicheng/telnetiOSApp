@@ -50,6 +50,23 @@
     UIBarButtonItem* connertorItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"connertor"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(connertorCilck)];
     self.navigationItem.rightBarButtonItem = connertorItem;
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"扫描" style:UIBarButtonItemStylePlain target:self action:@selector(goScannerViewController)];
+    [self UPFFileWriteToShahe];
+}
+
+//upf写入沙盒文件
+-(void)UPFFileWriteToShahe{
+    NSString* documents = [NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+    NSString* tempName = [NSString stringWithFormat:@"%@.upf",updateHigeFileName];
+    NSString* filePath = [NSString stringWithFormat:@"%@/%@",documents,tempName];
+    BOOL isDir = NO;
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:documents isDirectory:&isDir]==NO || isDir == NO) {
+        [fileManager createDirectoryAtPath:documents withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString* path = [[NSBundle mainBundle] pathForResource:updateHigeFileName ofType:@"upf"];
+    NSData* data = [NSData dataWithContentsOfFile:path];
+    [fileManager createFileAtPath:filePath contents:data attributes:nil];
+    NSLog(@"filepath--%@",filePath);
 }
 
 -(void)connertorCilck
@@ -76,10 +93,10 @@
 
 -(cloudAndPwdAlertView *)alertView
 {
-    if (!_alertView) {
+//    if (!_alertView) {
         _alertView = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([cloudAndPwdAlertView class]) owner:nil options:nil][0];
         _alertView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    }
+//    }
     return _alertView;
 }
 

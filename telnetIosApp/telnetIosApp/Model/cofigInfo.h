@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface cofigInfo : NSObject
-
+@property (nonatomic, strong)NSString *version;
+@property (nonatomic, strong)NSString *versionDate;
 @property (nonatomic, strong)NSString *Service1Enable;
 @property (nonatomic, strong)NSString *Service1name;
 @property (nonatomic, strong)NSString *Service1Servicelist;
@@ -28,6 +29,8 @@
 @property (nonatomic, strong)NSString *wan_pppoe_user;
 @property (nonatomic, strong)NSString *wan_pppoe_pass;
 @property (nonatomic, strong)NSString *reachabilityStatus;
+@property (nonatomic, strong)NSString *getSSID;
+@property (nonatomic, strong)NSString *getWPAPSK1;
 
 @property (nonatomic, strong)NSString *set_Service1Enable;
 @property (nonatomic, strong)NSString *set_Service1name;
@@ -47,6 +50,8 @@
 @property (nonatomic, strong)NSString *set_wan_pppoe_user;
 @property (nonatomic, strong)NSString *set_wan_pppoe_pass;
 @property (nonatomic, strong)NSString *set_reachabilityStatus;
+@property (nonatomic, strong)NSString *setSSID;
+@property (nonatomic, strong)NSString *setWPAPSK1;
 
 @property (nonatomic, strong)NSString *pppoeerrcode;
 

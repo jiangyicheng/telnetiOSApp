@@ -16,6 +16,9 @@
 #import "RealReachability.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
 
+#define labelW 100
+#define labelH 35
+
 @interface ConfigTableViewController ()<UIPopoverPresentationControllerDelegate,UITextFieldDelegate>
 {
     CGFloat rowHeight_;
@@ -26,6 +29,8 @@
 @property(nonatomic,strong)popViewController* wanConnectionModePOP;
 @property(nonatomic,strong)NSString* wanConnectionMode;
 
+@property (weak, nonatomic) IBOutlet UITextField *wifiNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *wifiPwdTF;
 @property(nonatomic,strong)UIView* PPPOEView;
 @property(nonatomic,strong)UITextField* userNameTF;
 @property(nonatomic,strong)UITextField* passWordTF;
@@ -41,6 +46,7 @@
 @property(nonatomic,strong)UITextField* wangguanTF;
 @property(nonatomic,strong)UITextField* firstDNSTF;
 @property(nonatomic,strong)UITextField* reserveDNSTF;
+@property(nonatomic,strong)NSArray* wangguangArray;
 
 @property(nonatomic,strong)NSMutableArray* portArr;
 
@@ -51,6 +57,49 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+#pragma mark - lazy
+
+/*
+ *  wangguangArray
+ */
+-(NSArray *)wangguangArray
+{
+    if (!_wangguangArray) {
+        _wangguangArray = @[@"128.0.0.0",
+                            @"192.0.0.0",
+                            @"224.0.0.0",
+                            @"240.0.0.0",
+                            @"248.0.0.0",
+                            @"252.0.0.0",
+                            @"254.0.0.0",
+                            @"255.0.0.0",
+                            @"255.128.0.0",
+                            @"255.192.0.0",
+                            @"255.224.0.0",
+                            @"255.240.0.0",
+                            @"255.248.0.0",
+                            @"255.252.0.0",
+                            @"255.254.0.0",
+                            @"255.255.0.0",
+                            @"255.255.128.0",
+                            @"255.255.192.0",
+                            @"255.255.224.0",
+                            @"255.255.240.0",
+                            @"255.255.248.0",
+                            @"255.255.252.0",
+                            @"255.255.254.0",
+                            @"255.255.255.0",
+                            @"255.255.255.128",
+                            @"255.255.255.192",
+                            @"255.255.255.224",
+                            @"255.255.255.240",
+                            @"255.255.255.248",
+                            @"255.255.255.252",
+                            @"255.255.255.254",
+                            @"255.255.255.255"];
+    }
+    return _wangguangArray;
 }
 
 - (void)viewDidLoad {
@@ -88,6 +137,11 @@
 
 -(void)refreshErrorCode
 {
+    ReachabilityStatus status = [GLobalRealReachability currentReachabilityStatus];
+    if (!(status == RealStatusNotReachable))
+    {
+        return;
+    }
     NSString* codeStr = [NSString string];
     if ([[cofigInfo sharedInstance].pppoeerrcode containsString:@"678"]) {
         codeStr = @"连接超时";
@@ -239,6 +293,8 @@
 -(void)setUpData
 {
     rowHeight_ = 150;
+    self.wifiNameTF.text = [cofigInfo sharedInstance].getSSID;
+    self.wifiPwdTF.text = [cofigInfo sharedInstance].getWPAPSK1;
     self.VLANIDLab.text = [cofigInfo sharedInstance].Service1VlanId;
     if ([[cofigInfo sharedInstance].Service1VlanId isEqualToString:@"0"]) {
         [self.VLANSch setOn:NO];
@@ -335,33 +391,88 @@
 //    [self getWifiName];
 //    if ([_currentWifiName isEqualToString:self.wifiName]) {
     if ([self.connectStyleBtn.titleLabel.text containsString:@"PPPOE"]) {
-        if (![self vaildTextfieldTextwithText:self.userNameTF.text]) {
-            [self alertWithMessage:@"请检查用户名输入是否有误"];
+        if (self.userNameTF.text.length == 0) {
+            [self alertWithMessage:@"请输入用户名"];
             return;
         }
-        if (![self vaildTextfieldTextwithText:self.passWordTF.text]) {
-            [self alertWithMessage:@"请检查密码输入是否有误"];
+        if (self.passWordTF.text.length == 0) {
+            [self alertWithMessage:@"请输入密码"];
             return;
         }
     }else if ([self.connectStyleBtn.titleLabel.text containsString:@"STATIC"]){
-        if (![self vaildTextfieldTextwithText:self.ipTF.text]) {
-            [self alertWithMessage:@"请检查IP地址输入是否有误"];
+        //匹配ip
+        NSString *regex = @"^(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$";//127.0.0.0-127.255.255.255
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        BOOL IPIsValid = [predicate evaluateWithObject:self.ipTF.text];
+        
+        //匹配127 开头的IP
+        NSString* ipExterRegex = @"^(127)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$";
+        NSPredicate *exterPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ipExterRegex];
+        BOOL ipExterValid = [exterPredicate evaluateWithObject:self.ipTF.text];
+        
+        //匹配168.192 开头的IP
+        NSString* ipTwiceRegex = @"^(192)\\.(168)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\.(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$";
+        NSPredicate *twicePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ipTwiceRegex];
+        BOOL ipTwiceValid = [twicePredicate evaluateWithObject:self.ipTF.text];
+    
+        NSString* yanMaRegex = @"^(254|252|248|240|224|192|128|0)\\.0\\.0\\.0|255\\.(254|252|248|240|224|192|128|0)\\.0\\.0|255\\.255\\.(254|252|248|240|224|192|128|0)\\.0|255\\.255\\.255\\.(254|252|248|240|224|192|128|0)$";
+        NSPredicate *yanMaPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", yanMaRegex];
+        BOOL yanMaValid = [yanMaPredicate evaluateWithObject:self.yanmaTF.text];
+        
+        if (!IPIsValid) {
+            [self alertWithMessage:@"请输入正确的IP地址"];
             return;
         }
-        if (![self vaildTextfieldTextwithText:self.yanmaTF.text]) {
-            [self alertWithMessage:@"请检查子网掩码输入是否有误"];
+        if (ipExterValid) {
+            [self alertWithMessage:@"请勿输入环回地址"];
             return;
         }
-        if (![self vaildTextfieldTextwithText:self.wangguanTF.text]) {
-            [self alertWithMessage:@"请检查缺省网关输入是否有误"];
+        if (ipTwiceValid) {
+            [self alertWithMessage:@"请勿输入192.168开头的IP地址"];
             return;
         }
-        if (![self vaildTextfieldTextwithText:self.firstDNSTF.text]) {
-            [self alertWithMessage:@"请检查首选DNS服务输入是否有误"];
+        if (self.ipTF.text.length == 0) {
+            [self alertWithMessage:@"请输入IP地址"];
             return;
         }
-        if (![self vaildTextfieldTextwithText:self.reserveDNSTF.text]) {
-            [self alertWithMessage:@"请检查备用DNS服务器输入是否有误"];
+        if (self.yanmaTF.text.length == 0) {
+            [self alertWithMessage:@"请输入子网掩码"];
+            return;
+        }
+        if (self.wifiPwdTF.text.length == 0) {
+            [self alertWithMessage:@"请输入无线名称"];
+        }
+        if (self.wifiNameTF.text.length == 0) {
+            [self alertWithMessage:@"请输入无线密码"];
+        }
+        if (!yanMaValid) {
+            [self alertWithMessage:@"请输入正确的子网掩码"];
+            return;
+        }
+        if (self.wangguanTF.text.length == 0) {
+            [self alertWithMessage:@"请输入缺省网关"];
+            return;
+        }
+        if (![self.wangguangArray containsObject:self.wangguanTF.text]) {
+            [self alertWithMessage:@"请输入正确的缺省网关"];
+            return;
+        }
+        BOOL firstDNSIsValid = [predicate evaluateWithObject:self.firstDNSTF.text];
+        if (self.firstDNSTF.text.length == 0) {
+            [self alertWithMessage:@"请输入首选DNS服务器"];
+            return;
+        }
+        if (!firstDNSIsValid) {
+            [self alertWithMessage:@"请输入正确首选DNS服务器"];
+            return;
+        }
+        BOOL reserveDNSIsValid = [predicate evaluateWithObject:self.reserveDNSTF.text];
+        if (self.reserveDNSTF.text.length == 0) {
+            [self alertWithMessage:@"请输入备用DNS服务器"];
+            return;
+        }
+        if (!reserveDNSIsValid) {
+            [self alertWithMessage:@"请输入正确备用DNS服务器"];
             return;
         }
     }else if ([self.connectStyleBtn.titleLabel.text containsString:@"DHCP"]){
@@ -371,13 +482,18 @@
         }
     }
     
-    if (![self vaildNUMwithText:self.VLANIDLab.text]) {
-        [self alertWithMessage:@"请检查VLAN ID输入是否有误"];
+    if (self.VLANIDLab.text.length == 0) {
+        [self alertWithMessage:@"请输入VLAN ID"];
         return ;
     }
-    if (![self vaildNUMwithText:self.priorityLab.text]) {
-        [self alertWithMessage:@"请检查优先级输入是否有误"];
+    if (self.priorityLab.text.length == 0) {
+        [self alertWithMessage:@"请输入优先级"];
         return;
+    }
+    NSInteger vlanId = [self.VLANIDLab.text integerValue];
+    if (self.VLANSch.isOn && (vlanId < 2 || vlanId > 4095 || (vlanId == 4081))) {
+        [self alertWithMessage:@"请设置正确的VLAN ID"];
+        return ;
     }
         [cofigInfo sharedInstance].set_wan_ipaddr = [NSString stringWithFormat:@"nvram_set wan_ipaddr %@",_ipTF.text];
         NSLog(@"set_wan_ipaddr==%@",[cofigInfo sharedInstance].set_wan_ipaddr);
@@ -399,6 +515,10 @@
         
         [cofigInfo sharedInstance].set_wan_pppoe_pass = [NSString stringWithFormat:@"nvram_set wan_pppoe_pass %@",_passWordTF.text];
         NSLog(@"set_wan_pppoe_pass==%@",[cofigInfo sharedInstance].set_wan_pppoe_pass);
+    
+    [cofigInfo sharedInstance].setSSID = [NSString stringWithFormat:@"nvram_set SSID1 %@",self.wifiNameTF.text];
+    
+    [cofigInfo sharedInstance].setWPAPSK1 = [NSString stringWithFormat:@"nvram_set WPAPSK1 %@",self.wifiPwdTF.text];
         
         NSString* portMap = [self.portArr componentsJoinedByString:@""];
         [cofigInfo sharedInstance].set_Service1Portmap = [NSString stringWithFormat:@"nvram_set Service1Portmap %@",portMap];
@@ -514,9 +634,9 @@
     if (indexPath.row == 0) {
         return 60;
     }else if (indexPath.row == 1) {//260 140 100
+        return 105;
+    }else if (indexPath.row == 2) {//260 140 100
         return rowHeight_;
-    }else if (indexPath.row == 2) {
-        return 60;
     }else if (indexPath.row == 3) {
         return 60;
     }else if (indexPath.row == 4) {
@@ -524,6 +644,8 @@
     }else if (indexPath.row == 5) {
         return 60;
     }else if (indexPath.row == 6) {
+        return 60;
+    }else if (indexPath.row == 7) {
         return 60;
     }
     return 40;
@@ -541,14 +663,10 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UITextField * userNameTextField = alertController.textFields.firstObject;
-        if (![self vaildTextfieldTextwithText:userNameTextField.text]) {
-            [SVProgressHUD showErrorWithStatus:@"输入无效字符"];
+        if (userNameTextField.text.length == 0) {
             return ;
         }
         if ([message containsString:@"有效值为"]) {
-            if (userNameTextField.text.length == 0) {
-                return ;
-            }
             NSInteger vlanId = [userNameTextField.text integerValue];
             if (vlanId < 2 || vlanId > 4095 || (vlanId == 4081)) {
                 [SVProgressHUD showErrorWithStatus:@"该VLAN ID无效"];
@@ -564,25 +682,15 @@
             }
             
         }else if ([message containsString:@"优先级"]){
-            if (userNameTextField.text.length == 0) {
-                return;
-            }
             NSInteger vlanId = [userNameTextField.text integerValue];
             if (vlanId < 0 || vlanId > 7) {
-                [SVProgressHUD showErrorWithStatus:@"该优先级的值无效"];
+                [SVProgressHUD showErrorWithStatus:@"优先级为0-7"];
                 return;
             }
             self.priorityLab.text = userNameTextField.text;
             [cofigInfo sharedInstance].set_Service1VlanPri = [NSString stringWithFormat:@"nvram_set Service1VlanPri \"%@\"",userNameTextField.text];
             NSLog(@"set_Service1VlanPri == %@" ,[cofigInfo sharedInstance].set_Service1VlanPri);
         }else if ([message containsString:@"设置Option60"]){
-            if (userNameTextField.text.length > 31) {
-                [SVProgressHUD showErrorWithStatus:@"该Option60的值无效"];
-                return;
-            }
-            if (userNameTextField.text.length == 0) {
-                return;
-            }
             self.function60Lab.text = userNameTextField.text;
             [cofigInfo sharedInstance].set_wan_vendor = [NSString stringWithFormat:@"nvram_set wan_vendor %@",userNameTextField.text];
             NSLog(@"set_wan_vendor == %@" ,[cofigInfo sharedInstance].set_wan_vendor);
@@ -593,6 +701,7 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"请输入内容";
         textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.delegate = self;
 //        textField.secureTextEntry = YES;
     }];
     
@@ -610,6 +719,8 @@
 
     UIBarButtonItem* commitItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"upload"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(commitPage)];
     self.navigationItem.rightBarButtonItems = @[refreshItem,commitItem];
+    
+    self.tableView.tableFooterView = [[UIView alloc]init];
 }
 
 -(void)setConnectStyleView:(UIView *)connectStyleView
@@ -684,24 +795,41 @@
         _PPPOEView = [[UIView alloc]init];
         _userNameTF = [[UITextField alloc]init];
         _userNameTF.placeholder = @"用户名";
+        _userNameTF.delegate = self;
         [self configTextfield:_userNameTF];
+        UILabel* label1 = [self configLabelWithTitle:@"用户名" withSuper:_PPPOEView];
         [_PPPOEView addSubview:_userNameTF];
         _passWordTF = [[UITextField alloc]init];
         _passWordTF.placeholder = @"密码";
         _passWordTF.secureTextEntry = YES;
+        _passWordTF.delegate = self;
         [self configTextfield:_passWordTF];
+        UILabel* label2 = [self configLabelWithTitle:@"密码" withSuper:_PPPOEView];
         [_PPPOEView addSubview:_passWordTF];
+        
+        [label1 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_PPPOEView.left).offset(65);
+            make.bottom.equalTo(_PPPOEView.centerY).offset(-5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(70);
+        }];
         [_userNameTF makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(_PPPOEView.centerY).offset(-5);
-            make.left.equalTo(_PPPOEView.left).offset(65);
+            make.left.equalTo(label1.right).offset(0);
             make.right.equalTo(_PPPOEView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
+        }];
+        [label2 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_PPPOEView.left).offset(65);
+            make.top.equalTo(_PPPOEView.centerY).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(70);
         }];
         [_passWordTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_PPPOEView.centerY).offset(5);
-            make.left.equalTo(_PPPOEView.left).offset(65);
+            make.left.equalTo(label2.right).offset(0);
             make.right.equalTo(_PPPOEView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
         }];
         _PPPOEView.hidden = NO;
     }
@@ -714,53 +842,93 @@
         _STATICView = [[UIView alloc]init];
         _ipTF = [[UITextField alloc]init];
         _ipTF.placeholder = @"IP地址";
+        _ipTF.delegate = self;
         [self configTextfield:_ipTF];
+        UILabel* label1 = [self configLabelWithTitle:@"IP地址" withSuper:_STATICView];
         [_STATICView addSubview:_ipTF];
         _yanmaTF = [[UITextField alloc]init];
         _yanmaTF.placeholder = @"子网掩码";
+        _yanmaTF.delegate = self;
         [self configTextfield:_yanmaTF];
+        UILabel* label2 = [self configLabelWithTitle:@"子网掩码" withSuper:_STATICView];
         [_STATICView addSubview:_yanmaTF];
         _wangguanTF = [[UITextField alloc]init];
         _wangguanTF.placeholder = @"缺省网关";
+        _wangguanTF.delegate = self;
         [self configTextfield:_wangguanTF];
+        UILabel* label3 = [self configLabelWithTitle:@"缺省网关" withSuper:_STATICView];
         [_STATICView addSubview:_wangguanTF];
         _firstDNSTF = [[UITextField alloc]init];
         _firstDNSTF.placeholder = @"首选DNS服务器";
+        _firstDNSTF.delegate = self;
         [self configTextfield:_firstDNSTF];
+        UILabel* label4 = [self configLabelWithTitle:@"首选DNS服务器" withSuper:_STATICView];
         [_STATICView addSubview:_firstDNSTF];
         _reserveDNSTF = [[UITextField alloc]init];
         _reserveDNSTF.placeholder = @"备用DNS服务器";
+        _reserveDNSTF.delegate = self;
         [self configTextfield:_reserveDNSTF];
+        UILabel* label5 = [self configLabelWithTitle:@"备用DNS服务器" withSuper:_STATICView];
         [_STATICView addSubview:_reserveDNSTF];
+        [label1 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_STATICView.left).offset(65);
+            make.top.equalTo(_STATICView.top).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(labelW);
+        }];
         [_ipTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_STATICView.top).offset(5);
-            make.left.equalTo(_STATICView.left).offset(65);
-            make.height.equalTo(35);
+            make.left.equalTo(label1.right).offset(0);
+            make.height.equalTo(labelH);
             make.right.equalTo(_STATICView.right).offset(-20);
+        }];
+        [label2 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_STATICView.left).offset(65);
+            make.top.equalTo(label1.bottom).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(labelW);
         }];
         [_yanmaTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_ipTF.bottom).offset(5);
-            make.left.equalTo(_STATICView.left).offset(65);
+            make.left.equalTo(label2.right).offset(0);
             make.right.equalTo(_STATICView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
+        }];
+        [label3 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_STATICView.left).offset(65);
+            make.top.equalTo(label2.bottom).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(labelW);
         }];
         [_wangguanTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_yanmaTF.bottom).offset(5);
-            make.left.equalTo(_STATICView.left).offset(65);
+            make.left.equalTo(label3.right).offset(0);
             make.right.equalTo(_STATICView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
+        }];
+        [label4 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_STATICView.left).offset(65);
+            make.top.equalTo(label3.bottom).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(labelW);
         }];
         [_firstDNSTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_wangguanTF.bottom).offset(5);
-            make.left.equalTo(_STATICView.left).offset(65);
+            make.left.equalTo(label4.right).offset(0);
             make.right.equalTo(_STATICView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
+        }];
+        [label5 makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_STATICView.left).offset(65);
+            make.top.equalTo(label4.bottom).offset(5);
+            make.height.equalTo(labelH);
+            make.width.equalTo(labelW);
         }];
         [_reserveDNSTF makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_firstDNSTF.bottom).offset(5);
-            make.left.equalTo(_STATICView.left).offset(65);
+            make.left.equalTo(label5.right).offset(0);
             make.right.equalTo(_STATICView.right).offset(-20);
-            make.height.equalTo(35);
+            make.height.equalTo(labelH);
         }];
         _STATICView.hidden = YES;
     }
@@ -842,7 +1010,36 @@
     return textfield;
 }
 
+-(UILabel*)configLabelWithTitle:(NSString*)title withSuper:(UIView*)superView
+{
+    UILabel * label = [[UILabel alloc]init];
+    label.text = title;
+    label.font = [UIFont systemFontOfSize:13];
+    label.textColor = [UIColor darkGrayColor];
+    [superView addSubview:label];
+    return label;
+}
+
 #pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //限制空格输入
+    NSString *tem = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]componentsJoinedByString:@""];
+    if (![string isEqualToString:tem]) {
+        return NO;
+    }
+    if (textField.text.length > 31 && ![string isEqualToString:@""]) {
+        return NO;
+    }
+    NSString *regex = @"^([- _ @ .]|[A-Za-z0-9]){1}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isValid = [predicate evaluateWithObject:string];
+    if (!isValid && ![string isEqualToString:@""]) {
+        return NO;
+    }
+    return YES;
+}
 
 
 

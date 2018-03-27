@@ -12,6 +12,7 @@
 		7C807A5C1F5659E000164670 /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A5A1F5659E000164670 /* MainTableViewCell.m */; };
 		7C807A5D1F5659E000164670 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C807A5B1F5659E000164670 /* MainTableViewCell.xib */; };
 		7C807A601F565FDD00164670 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C807A5F1F565FDD00164670 /* Config.m */; };
+		7C901777204FB98400F44F5E /* WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf in Resources */ = {isa = PBXBuildFile; fileRef = 7C901776204FB98300F44F5E /* WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf */; };
 		7CAF0C761F4AD7D6000B65DE /* QRCScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C631F4AD7D6000B65DE /* QRCScanner.m */; };
 		7CAF0C771F4AD7D6000B65DE /* bitstream.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C661F4AD7D6000B65DE /* bitstream.c */; };
 		7CAF0C781F4AD7D6000B65DE /* mask.c in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0C681F4AD7D6000B65DE /* mask.c */; };
@@ -27,10 +28,19 @@
 		7CAF0CD31F4D1A02000B65DE /* cloudAndPwdAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD21F4D1A02000B65DE /* cloudAndPwdAlertView.m */; };
 		7CAF0CD51F4D1A0D000B65DE /* cloudAndPwdAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD41F4D1A0D000B65DE /* cloudAndPwdAlertView.xib */; };
 		7CAF0CD81F4D2963000B65DE /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF0CD71F4D2963000B65DE /* UIView+Toast.m */; };
+		7CB1F4582046B0FD00560133 /* WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf in Resources */ = {isa = PBXBuildFile; fileRef = 7CB1F4572046B0FC00560133 /* WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf */; };
+		7CB1F45B2046BAA700560133 /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB1F45A2046BAA600560133 /* FTPManager.m */; };
 		7CC737701F3AB4F700113B3F /* UIViewController+DismissKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */; };
 		7CC737761F3AB5EC00113B3F /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737731F3AB5EC00113B3F /* GCDAsyncSocket.m */; };
 		7CC737771F3AB5EC00113B3F /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737751F3AB5EC00113B3F /* GCDAsyncUdpSocket.m */; };
 		7CC7377A1F3AB5FA00113B3F /* YSSocketProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CC737791F3AB5FA00113B3F /* YSSocketProtocol.m */; };
+		7CD84DC02048EEB300233EDF /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DB52048EEB300233EDF /* AsyncSocket.m */; };
+		7CD84DC12048EEB300233EDF /* xmftp_commands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CD84DB62048EEB300233EDF /* xmftp_commands.plist */; };
+		7CD84DC22048EEB300233EDF /* XMFTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DB82048EEB300233EDF /* XMFTPConnection.m */; };
+		7CD84DC32048EEB300233EDF /* XMFTPDataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DBA2048EEB300233EDF /* XMFTPDataConnection.m */; };
+		7CD84DC42048EEB300233EDF /* XMFTPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DBD2048EEB300233EDF /* XMFTPHelper.m */; };
+		7CD84DC52048EEB300233EDF /* XMFTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DBF2048EEB300233EDF /* XMFTPServer.m */; };
+		7CD84DC82048F07400233EDF /* NSString+XP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD84DC72048F07400233EDF /* NSString+XP.m */; };
 		7CDE09B31F56633800C3378B /* BaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B21F56633800C3378B /* BaseNavViewController.m */; };
 		7CDE09B61F56639300C3378B /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B51F56639300C3378B /* AppConst.m */; };
 		7CDE09BA1F56B5F000C3378B /* smallSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDE09B91F56B5F000C3378B /* smallSwitch.m */; };
@@ -82,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		58B451F93119C9119D1CB594 /* Pods-telnetIosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-telnetIosApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-telnetIosApp/Pods-telnetIosApp.debug.xcconfig"; sourceTree = "<group>"; };
+		7C4AC6842047D569007CFE65 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7C807A531F555CB300164670 /* TelDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelDataBase.h; sourceTree = "<group>"; };
 		7C807A541F555CB300164670 /* TelDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelDataBase.m; sourceTree = "<group>"; };
 		7C807A561F5561E600164670 /* ipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ipModel.h; sourceTree = "<group>"; };
@@ -91,6 +102,7 @@
 		7C807A5B1F5659E000164670 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
 		7C807A5E1F565FDD00164670 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		7C807A5F1F565FDD00164670 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		7C901776204FB98300F44F5E /* WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf; sourceTree = "<group>"; };
 		7CAF0C621F4AD7D6000B65DE /* QRCScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCScanner.h; sourceTree = "<group>"; };
 		7CAF0C631F4AD7D6000B65DE /* QRCScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCScanner.m; sourceTree = "<group>"; };
 		7CAF0C661F4AD7D6000B65DE /* bitstream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitstream.c; sourceTree = "<group>"; };
@@ -119,6 +131,9 @@
 		7CAF0CD41F4D1A0D000B65DE /* cloudAndPwdAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = cloudAndPwdAlertView.xib; sourceTree = "<group>"; };
 		7CAF0CD61F4D2963000B65DE /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		7CAF0CD71F4D2963000B65DE /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		7CB1F4572046B0FC00560133 /* WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf; sourceTree = "<group>"; };
+		7CB1F4592046BAA600560133 /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
+		7CB1F45A2046BAA600560133 /* FTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPManager.m; sourceTree = "<group>"; };
 		7CC7376E1F3AB4F700113B3F /* UIViewController+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DismissKeyboard.h"; sourceTree = "<group>"; };
 		7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DismissKeyboard.m"; sourceTree = "<group>"; };
 		7CC737721F3AB5EC00113B3F /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -127,6 +142,20 @@
 		7CC737751F3AB5EC00113B3F /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		7CC737781F3AB5FA00113B3F /* YSSocketProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSSocketProtocol.h; sourceTree = "<group>"; };
 		7CC737791F3AB5FA00113B3F /* YSSocketProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSSocketProtocol.m; sourceTree = "<group>"; };
+		7CD84DB42048EEB300233EDF /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		7CD84DB52048EEB300233EDF /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		7CD84DB62048EEB300233EDF /* xmftp_commands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = xmftp_commands.plist; sourceTree = "<group>"; };
+		7CD84DB72048EEB300233EDF /* XMFTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFTPConnection.h; sourceTree = "<group>"; };
+		7CD84DB82048EEB300233EDF /* XMFTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMFTPConnection.m; sourceTree = "<group>"; };
+		7CD84DB92048EEB300233EDF /* XMFTPDataConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFTPDataConnection.h; sourceTree = "<group>"; };
+		7CD84DBA2048EEB300233EDF /* XMFTPDataConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMFTPDataConnection.m; sourceTree = "<group>"; };
+		7CD84DBB2048EEB300233EDF /* XMFTPDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFTPDefines.h; sourceTree = "<group>"; };
+		7CD84DBC2048EEB300233EDF /* XMFTPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFTPHelper.h; sourceTree = "<group>"; };
+		7CD84DBD2048EEB300233EDF /* XMFTPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMFTPHelper.m; sourceTree = "<group>"; };
+		7CD84DBE2048EEB300233EDF /* XMFTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMFTPServer.h; sourceTree = "<group>"; };
+		7CD84DBF2048EEB300233EDF /* XMFTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMFTPServer.m; sourceTree = "<group>"; };
+		7CD84DC62048F07400233EDF /* NSString+XP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XP.h"; sourceTree = "<group>"; };
+		7CD84DC72048F07400233EDF /* NSString+XP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XP.m"; sourceTree = "<group>"; };
 		7CDE09B11F56633800C3378B /* BaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavViewController.h; sourceTree = "<group>"; };
 		7CDE09B21F56633800C3378B /* BaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavViewController.m; sourceTree = "<group>"; };
 		7CDE09B41F56639300C3378B /* AppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
@@ -217,6 +246,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C7AF3DF1FE0FFB500171FDB /* data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		7CAF0C611F4AD7D6000B65DE /* QRCodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +308,7 @@
 		7CAF0CCE1F4C275F000B65DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C4AC6842047D569007CFE65 /* CFNetwork.framework */,
 				7CE0E5B21F57E077003C06A4 /* SystemConfiguration.framework */,
 				7CAF0CCF1F4C2760000B65DE /* NetworkExtension.framework */,
 				BF67A23096EF5C704DA1A335 /* libPods-telnetIosApp.a */,
@@ -288,6 +325,8 @@
 				7CC7376F1F3AB4F700113B3F /* UIViewController+DismissKeyboard.m */,
 				7C807A5E1F565FDD00164670 /* Config.h */,
 				7C807A5F1F565FDD00164670 /* Config.m */,
+				7CD84DC62048F07400233EDF /* NSString+XP.h */,
+				7CD84DC72048F07400233EDF /* NSString+XP.m */,
 				7CDE09B41F56639300C3378B /* AppConst.h */,
 				7CDE09B51F56639300C3378B /* AppConst.m */,
 				7CDE09B71F5663C800C3378B /* appColor.h */,
@@ -298,6 +337,8 @@
 		7CC737711F3AB5E200113B3F /* GCD */ = {
 			isa = PBXGroup;
 			children = (
+				7CB1F45A2046BAA600560133 /* FTPManager.m */,
+				7CB1F4592046BAA600560133 /* FTPManager.h */,
 				7CC737721F3AB5EC00113B3F /* GCDAsyncSocket.h */,
 				7CC737731F3AB5EC00113B3F /* GCDAsyncSocket.m */,
 				7CC737741F3AB5EC00113B3F /* GCDAsyncUdpSocket.h */,
@@ -310,9 +351,38 @@
 			path = GCD;
 			sourceTree = "<group>";
 		};
+		7CD84DB22048EEB300233EDF /* XMFTPServer */ = {
+			isa = PBXGroup;
+			children = (
+				7CD84DB32048EEB300233EDF /* CocoaAsyncSocket */,
+				7CD84DB62048EEB300233EDF /* xmftp_commands.plist */,
+				7CD84DB72048EEB300233EDF /* XMFTPConnection.h */,
+				7CD84DB82048EEB300233EDF /* XMFTPConnection.m */,
+				7CD84DB92048EEB300233EDF /* XMFTPDataConnection.h */,
+				7CD84DBA2048EEB300233EDF /* XMFTPDataConnection.m */,
+				7CD84DBB2048EEB300233EDF /* XMFTPDefines.h */,
+				7CD84DBC2048EEB300233EDF /* XMFTPHelper.h */,
+				7CD84DBD2048EEB300233EDF /* XMFTPHelper.m */,
+				7CD84DBE2048EEB300233EDF /* XMFTPServer.h */,
+				7CD84DBF2048EEB300233EDF /* XMFTPServer.m */,
+			);
+			path = XMFTPServer;
+			sourceTree = "<group>";
+		};
+		7CD84DB32048EEB300233EDF /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				7CD84DB42048EEB300233EDF /* AsyncSocket.h */,
+				7CD84DB52048EEB300233EDF /* AsyncSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
 		7CE366F41F386F6C00171647 = {
 			isa = PBXGroup;
 			children = (
+				7CB1F4572046B0FC00560133 /* WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf */,
+				7C901776204FB98300F44F5E /* WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf */,
 				7CE366FF1F386F6C00171647 /* telnetIosApp */,
 				7CE367191F386F6C00171647 /* telnetIosAppTests */,
 				7CE367241F386F6C00171647 /* telnetIosAppUITests */,
@@ -335,6 +405,8 @@
 		7CE366FF1F386F6C00171647 /* telnetIosApp */ = {
 			isa = PBXGroup;
 			children = (
+				7CD84DB22048EEB300233EDF /* XMFTPServer */,
+				7C7AF3DF1FE0FFB500171FDB /* data */,
 				7CFD3CB31F59011F0047D584 /* NetStatus */,
 				7CC737711F3AB5E200113B3F /* GCD */,
 				7CE367341F38701F00171647 /* Controller */,
@@ -608,7 +680,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CE367101F386F6C00171647 /* LaunchScreen.storyboard in Resources */,
+				7CD84DC12048EEB300233EDF /* xmftp_commands.plist in Resources */,
 				7CAF0CD51F4D1A0D000B65DE /* cloudAndPwdAlertView.xib in Resources */,
+				7CB1F4582046B0FD00560133 /* WiFi_V1R10B2F1_20170922_bd_20171014_HighVer_8M.upf in Resources */,
+				7C901777204FB98400F44F5E /* WiFi_V1R10B2F0_20170824_bd_20170909_HighVer_8M.upf in Resources */,
 				7CE3670D1F386F6C00171647 /* Assets.xcassets in Resources */,
 				7CE3670B1F386F6C00171647 /* Main.storyboard in Resources */,
 				7C807A5D1F5659E000164670 /* MainTableViewCell.xib in Resources */,
@@ -689,12 +764,17 @@
 				7CDE09B61F56639300C3378B /* AppConst.m in Sources */,
 				7CAF0C791F4AD7D6000B65DE /* qrencode.c in Sources */,
 				7CFD3CD61F5901320047D584 /* ReachStateUnloaded.m in Sources */,
+				7CD84DC42048EEB300233EDF /* XMFTPHelper.m in Sources */,
+				7CD84DC02048EEB300233EDF /* AsyncSocket.m in Sources */,
 				7CC737761F3AB5EC00113B3F /* GCDAsyncSocket.m in Sources */,
 				7CAF0C7A1F4AD7D6000B65DE /* qrinput.c in Sources */,
 				7CAF0C7E1F4AD7D6000B65DE /* UIImage+MDQRCode.m in Sources */,
+				7CD84DC32048EEB300233EDF /* XMFTPDataConnection.m in Sources */,
 				7CAF0C771F4AD7D6000B65DE /* bitstream.c in Sources */,
 				7CDE09BA1F56B5F000C3378B /* smallSwitch.m in Sources */,
+				7CD84DC82048F07400233EDF /* NSString+XP.m in Sources */,
 				7CAF0C7D1F4AD7D6000B65DE /* split.c in Sources */,
+				7CD84DC52048EEB300233EDF /* XMFTPServer.m in Sources */,
 				7CFD3CD11F5901320047D584 /* LocalConnection.m in Sources */,
 				7CFD3CD51F5901320047D584 /* ReachStateLoading.m in Sources */,
 				7C807A581F5561E600164670 /* ipModel.m in Sources */,
@@ -707,6 +787,7 @@
 				7CFD3CD91F5901320047D584 /* ReachStateWWAN.m in Sources */,
 				7CAF0CD31F4D1A02000B65DE /* cloudAndPwdAlertView.m in Sources */,
 				7CFD3CDD1F5901320047D584 /* RealReachability.m in Sources */,
+				7CD84DC22048EEB300233EDF /* XMFTPConnection.m in Sources */,
 				7CE7CB901F4EBCA4009787BA /* ConfigTableViewController.m in Sources */,
 				7CDE09B31F56633800C3378B /* BaseNavViewController.m in Sources */,
 				7CC7377A1F3AB5FA00113B3F /* YSSocketProtocol.m in Sources */,
@@ -716,6 +797,7 @@
 				7CAF0CCD1F4C0C9D000B65DE /* SSIDTool.m in Sources */,
 				7CAF0CD81F4D2963000B65DE /* UIView+Toast.m in Sources */,
 				7C807A551F555CB300164670 /* TelDataBase.m in Sources */,
+				7CB1F45B2046BAA700560133 /* FTPManager.m in Sources */,
 				7CFD3CD41F5901320047D584 /* ReachState.m in Sources */,
 				7CFD3CD81F5901320047D584 /* ReachStateWIFI.m in Sources */,
 				7CE367051F386F6C00171647 /* AppDelegate.m in Sources */,
